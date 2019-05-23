@@ -1,0 +1,117 @@
+@import '//at.alicdn.com/t/font_1204177_05tao43us8pm.css';
+@import './variables.less';
+
+/**
+ * reset
+ */
+
+body,
+:global(#root) {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	color: @font-color-base;
+	font-size: @font-size-base;
+	font-family: "Microsoft YaHei", "微软雅黑", Arial, "STHeiti", sans-serif;
+}
+
+body {
+	background-color: @body-bgcolor;
+}
+
+:global {
+	.test {
+		border-radius: 100%;
+		width: unit(60, @unit) / @base;
+		height: unit(60, @unit) / @base;
+		background: green;
+	}
+	*,
+	*:before,
+	*:after {
+		margin: 0;
+		padding: 0;
+		border: none;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		/**
+		 * 字体样式不模糊
+		 */
+		-webkit-font-smoothing: antialiased;
+		font-smoothing: antialiased;
+
+		/**
+		 * 可以复制粘帖
+		 */
+		-webkit-user-select: all !important;
+		user-select: auto !important;
+		-webkit-appearance: none;
+
+
+	}
+	.iconfont {
+		font-family: "iconfont" !important;
+		font-size: 16px;
+		color: #666;
+		font-style: normal;
+	}
+
+	textarea::-webkit-input-placeholder, 
+	input::-webkit-input-placeholder {
+		color: #999 !important;
+		font-size: 14px;
+		font-weight: normal;
+		font-family: "Microsoft YaHei", "微软雅黑", Arial, "STHeiti", sans-serif !important;
+	}
+	[contenteditable="true"], input, textarea {
+		-webkit-user-select: auto !important;
+		-khtml-user-select: auto !important;
+		-moz-user-select: auto !important;
+		-ms-user-select: auto !important;
+		-o-user-select: auto !important;
+		user-select: auto !important;
+	}
+	/**
+	*  初始化元素的类
+	*/
+	ol, ul, li {
+		list-style: none;
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	img {
+		vertical-align: middle;
+		max-width: 100%;
+	}
+	i, b, em, span {
+		font-weight: normal;
+		font-style: normal;
+		display: inline-block;
+	}
+	button {
+		outline-style: none;
+	}
+	input, textarea {
+		outline: none;
+	}
+	/**
+	* scrollbar bg
+	*/
+	::-webkit-scrollbar-track {
+		box-shadow: @scrollbar-track-box-shadow;
+		border-radius: 5px;
+		background: @scrollbar-track-bgcolor;
+	}
+	/**
+	* Handle
+	*/
+	::-webkit-scrollbar-thumb {
+		border-radius: 5px;
+		background: @scrollbar-thumb-bgcolor;
+	}
+}
+
+@import './layout.less';

@@ -1,0 +1,216 @@
+:global {
+    /**
+    * layout 自适应
+    */
+    .columns-loop(@columns);
+    .columns-loop(@n, @i: 1) when (@i =< @n) {
+        .w@{i} {
+            width: (@i * 100% / @n);
+        }
+        .columns-loop(@n, (@i + 1));
+    }
+
+    .padding-loop(@paddingList);
+    .padding-loop(@list; @i: 1) when (@i < length(@list) + 1) {
+        @padding: extract(@list, @i);
+        .pl@{padding} {
+            padding-left: unit(@padding, @unit) / @base;
+        }
+        .pr@{padding} {
+            padding-right: unit(@padding, @unit) / @base;
+        }
+        .plr@{padding} {
+            padding-left: unit(@padding, @unit) / @base;
+            padding-right: unit(@padding, @unit) / @base;
+        }
+        .pt@{padding} {
+            padding-top: unit(@padding, @unit) / @base;
+        }
+        .pb@{padding} {
+            padding-bottom: unit(@padding, @unit) / @base;
+        }
+        .ptb@{padding} {
+            padding-top: unit(@padding, @unit) / @base;
+            padding-bottom: unit(@padding, @unit) / @base;
+        }
+        .p@{padding} {
+            padding: unit(@padding, @unit) / @base;
+        }
+        .padding-loop(@list, @i + 1);
+    }
+
+    .margin-loop(@marginList);
+    .margin-loop(@list; @i: 1) when (@i < length(@list) + 1) {
+        @margin: extract(@list, @i);
+        .ml@{margin} {
+            margin-left: unit(@margin, @unit) / @base;
+        }
+        .mr@{margin} {
+            margin-right: unit(@margin, @unit) / @base;
+        }
+        .mlr@{margin} {
+            margin-left: unit(@margin, @unit) / @base;
+            margin-right: unit(@margin, @unit) / @base;
+        }
+        .mt@{margin} {
+            margin-top: unit(@margin, @unit) / @base;
+        }
+        .mb@{margin} {
+            margin-bottom: unit(@margin, @unit) / @base;
+        }
+        .mtb@{margin} {
+            margin-top: unit(@margin, @unit) / @base;
+            margin-bottom: unit(@margin, @unit) / @base;
+        }
+        .m@{margin} {
+            margin: unit(@margin, @unit) / @base;
+        }
+        .margin-loop(@list, @i + 1);
+    }
+
+
+	.bb {
+		border-bottom: 1px solid @border-color;
+	}
+	.bt {
+		border-top: 1px solid @border-color;
+	}
+	.bl {
+		border-left: 1px solid @border-color;
+	}
+	.br {
+		border-right: 1px solid @border-color;
+	}
+
+    /**
+    * flex
+    */
+    .flex {
+		display: flex;
+	}
+	.flexfc {
+		.flex;
+		flex-direction: column;
+	}
+	.flexac {
+		.flex;
+		align-items: center;
+	}
+	.flexjc {
+		.flex;
+		justify-content: center;
+	}
+	.flexcc {
+        .flexac;
+        .flexjc;
+	}
+	.flexsb {
+		.flex;
+		justify-content: space-between;
+	}
+	.flexsa {
+		.flex;
+		justify-content: space-around;
+	}
+	.flexbox {
+	  	.flex;
+	  	flex-wrap: wrap;
+	}
+	.flexje {
+		.flex;
+	    justify-content: flex-end;
+	}
+	.col {
+		flex: 1;
+    }
+    
+    /**
+    * text 文本
+    */
+    .tc {
+        text-align: center;
+    }
+    .tl {
+        text-align: left;
+    }
+    .tr {
+        text-align: right;
+    }
+
+    .break {
+		word-wrap: break-word;
+		word-break: break-all; 
+	}
+
+    .fontSize-loop(1);
+    .fontSize-loop(@i) when (@i < length(@fontSizeList) + 1) {
+        @fontSize: extract(@fontSizeList, @i);
+        .fs@{fontSize} {
+            font-size: unit(@fontSize, @unit) / @base;
+        }
+        .fontSize-loop(@i + 1);
+    }
+
+    .lineHeight-loop(1);
+    .lineHeight-loop(@i) when (@i < length(@lineHeightList) + 1) {
+        @lineHeight: extract(@lineHeightList, @i);
+        .lh@{lineHeight} {
+            line-height: unit(@lineHeight, @unit) / @base;
+        }
+        .lineHeight-loop(@i + 1);
+    }
+    .line-loop(@lineList);
+    .line-loop (@list, @i: 1) when (@i < length(@list) + 1) {
+        @line: extract(@list, @i);
+        .line@{i} {
+            .line-extend(@line);
+        }
+        .line-loop(@list, @i + 1);
+    }
+    
+    .line-extend(@line; @lineHeight: unit(24, @unit) / @base) {
+        height: @lineHeight * @line;
+		line-height: @lineHeight * @line;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: @line;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-wrap: break-word;
+		word-break: break-all; 
+    }
+
+    /**
+    * color
+    */
+    .color-loop(@colorList);
+    .color-loop(@list, @i: 1) when (@i < length(@list) + 1) {
+        @color: extract(@list, @i);
+        .c@{color}{
+            color: @@color;
+        }
+        .bg@{color}{
+            background: @@color;
+        }
+        .color-loop(@list, @i + 1);
+    }
+
+    /**
+    * other
+    */
+    .hide {
+		overflow: hidden;
+    }
+    .poi {
+        cursor: pointer;
+    }
+    .size-loop(@sizeList);
+    .size-loop(@list; @i: 1) when(@i < length(@list) + 1) {
+        @size: extract(@list, @i);
+        .wh@{size} {
+            width: unit(@size, @unit) / @base;
+            height: unit(@size, @unit) / @base;
+        }
+        .size-loop(@list; @i + 1);
+    }
+}
