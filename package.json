@@ -4,7 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack-dev-server --config webpack/webpack.config.dev.js --progress --color"
+		"start": "npm run dev && npm run create",
+		"dev": "webpack-dev-server --config webpack/webpack.config.dev.js --progress --color",
+		"create": "node webpack/helper/create.js"
 	},
 	"repository": {
 		"type": "git",
@@ -36,14 +38,15 @@
 		"@babel/preset-react": "^7.0.0",
 		"babel-loader": "^8.0.6",
 		"babel-preset-mobx": "^2.0.0",
+		"chokidar": "^3.0.0",
 		"css-loader": "^2.1.1",
+		"ejs": "^2.6.1",
 		"eslint-plugin-react": "^7.13.0",
+		"fs-extra": "^8.0.1",
 		"html-webpack-plugin": "^3.2.0",
-		"install": "^0.12.2",
 		"less": "^3.9.0",
 		"less-loader": "^5.0.0",
-		"npm": "^6.9.0",
-		"react-hot-loader": "^4.8.7",
+		"require-all": "^3.0.0",
 		"style-loader": "^0.23.1",
 		"url-loader": "^1.1.2",
 		"webpack": "^4.31.0",

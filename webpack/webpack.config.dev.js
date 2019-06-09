@@ -5,9 +5,6 @@ const path = require("path");
 module.exports = {
     ...CommonConfig,
     entry: [
-        'react-hot-loader/patch',
-        'webpack-dev-server/client?http://127.0.0.1:7000',
-        'webpack/hot/only-dev-server',
         path.join(__dirname, '../src/index.js')
     ],
     devtool: 'source-map',

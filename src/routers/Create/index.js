@@ -1,6 +1,6 @@
 import Router from '../Router';
 import CreateStore from './actions/store';
-import Create from './Create';
+import Create from './views/Create';
 
 Router.addRoute({
     title: '创建',

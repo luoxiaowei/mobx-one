@@ -12,6 +12,7 @@ export default class Main extends Component {
         return (
             <div>
                 <div className={'test'}/>
+                <div className={'test2'}/>
                 <div>月份layout layout layout layout layout layout</div>
                 <Link to={'/one'}>one</Link><br/>
                 <Link to={'/two'}>two</Link><br/>

@@ -12,7 +12,6 @@ export default class Main extends Component {
     }
 
     componentDidMount() {
-        // store.getUserList();
     }
 
     handleClick = () => {
@@ -26,7 +25,7 @@ export default class Main extends Component {
             <div>
                 <div className={styles.cgreen}>one{this.state.color}</div>
                 <List/>
-                <button onClick={this.handleClick}>btn</button>
+                <button onClick={this.handleClick} className={'cred'}>btn</button>
             </div>
         );
     }

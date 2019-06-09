@@ -54,4 +54,10 @@ class Main extends Component {
     }
 }
 
+if (module.hot) { // 启用热更新
+	module.hot.accept(routers, () => {
+		console.log('[HRM] routers Callback');
+	});
+}
+
 export default Main;
