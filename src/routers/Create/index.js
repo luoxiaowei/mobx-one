@@ -5,7 +5,8 @@ import Create from './views/Create';
 Router.addRoute({
     title: '创建',
     path: '/create',
-    component: Create
+    component: Create,
+    isMune: true
 });
 
 Router.addStore({

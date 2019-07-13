@@ -3,6 +3,14 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+const lessToJs = require('less-vars-to-js');
+const fs = require('fs');
+const paletteLess = fs.readFileSync(path.join(__dirname, '../src/styles/variables.less'), 'utf8');
+const Theme = lessToJs(paletteLess, {
+    resolveVariables: true,
+    stripPreFix: true
+});
+
 module.exports = {
     entry: path.join(__dirname, '../src/index.js'), //工程入口文件,
     output:{
@@ -44,6 +52,7 @@ module.exports = {
             },
             {
                 test: /\.less$/,
+                exclude: /node_modules/,
                 use:[
                     {
                         loader: "style-loader"
@@ -61,6 +70,21 @@ module.exports = {
                 ]
             },
             {
+                test: /\.less$/,
+                include: /node_modules/,
+                use:[
+                    "style-loader",
+                    "css-loader",
+                    {
+                        loader: "less-loader",
+                        options: {
+                            modifyVars: Theme,
+                            javascriptEnabled: true
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.(jpg|png|jpeg)$/,
                 loader:"url-loader"
             }
@@ -69,8 +93,8 @@ module.exports = {
     resolve: {
         extensions: [".jsx", ".js"],
         alias: {
-            components: path.resolve(__dirname, "src/components"),
-            utils: path.resolve(__dirname, "src/utils"),
+            components: path.resolve(__dirname, "../src/components"),
+            utils: path.resolve(__dirname, "../src/utils"),
         }
     }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { message } from 'antd';
 const ajax = axios.create({
     timeout: 3000,
     withCredentials: true, // 支持跨域
@@ -16,7 +17,13 @@ ajax.interceptors.request.use(function (config) {
 // 添加响应拦截器
 ajax.interceptors.response.use(function (response) {
     // 对响应数据做点什么
-    return response.data;
+    let data = response.data;
+    if (data.success) {
+        return response.data;
+    } else {
+        message.error(data.msg || '网络不稳定，请稍后再试～');
+    }
+    
 }, function (error) {
     // 对响应错误做点什么
     console.log(error.response.statusText);

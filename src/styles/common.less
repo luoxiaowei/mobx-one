@@ -1,0 +1,35 @@
+// common
+:global {
+    .operate {
+        display: flex;
+        flex-wrap: wrap;
+        > span {
+            color: @primary-color;
+            cursor: pointer;
+            // padding-right: 15px;
+            display: block;
+            // border: 1px solid @border-color-base;
+            padding: 5px;
+            // border-radius: 4px;
+            margin-right: 8px;
+            // width: 80px;
+            // text-align: center;
+            margin: 4px;
+            // &:hover {
+            //     background: @primary-color;
+            //     color: #fff;
+            // }
+        }
+    } 
+    // antd 覆盖
+    .ant-menu-inline-collapsed {
+        > li {
+            span:last-child {
+                opacity: 0;
+            }
+        }
+    }  
+    .ant-message {
+        text-align: center;
+    }
+}

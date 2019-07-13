@@ -28,7 +28,7 @@ class Main extends Component {
     renderRoute = (routers) => {
         return routers.map(item => {
             return item.childs ? this.renderRoute(item.childs) : (
-                <Route key={item.path} {...item}></Route>
+                <Route key={'route' + item.path} {...item}></Route>
             );
         })
     }
@@ -37,9 +37,9 @@ class Main extends Component {
             <Provider {...stores}>
                 <Router history={history}>
                     <Route 
-                        render={() => {
+                        render={({ location }) => {
                             return (
-                                <Layout>
+                                <Layout menuList={routers} location={location}>
                                     <Switch>
                                         <Route path='/' exact render={() => (<Redirect to={'/create'} />)}/>
                                         {this.renderRoute(routers)}

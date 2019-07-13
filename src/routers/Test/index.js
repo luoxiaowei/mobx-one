@@ -10,12 +10,14 @@ Router.addRoute({
         {
             title: 'one',
             path: '/one',
-            component: One
+            component: One,
+            isMune: true
         },
         {
             title: 'two',
             path: '/two',
-            component: Two
+            component: Two,
+            isMune: true
         }
     ]
 });
