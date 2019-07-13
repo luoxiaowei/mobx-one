@@ -1,4 +1,4 @@
-import { observable, action, runInAction } from 'mobx';
+import { observable } from 'mobx';
 
 class CreateStore {
     @observable list = [];

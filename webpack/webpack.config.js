@@ -1,31 +1,43 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-    entry: {
-        app: path.join(__dirname, '../src/index.js') //工程入口文件
-    },
+    entry: path.join(__dirname, '../src/index.js'), //工程入口文件,
     output:{
-        filename: '[name].[hash].js',
+        filename: 'js/[name].[hash].js',
         path: path.join(__dirname, '../dist'),
-        publicPath: '' // 静态资源文件前缀 
+        publicPath: '/'
     },
     plugins:[
         new webpack.HotModuleReplacementPlugin(),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './public/index.html',
             filename: 'index.html',
             minify: {
                 removeAttributeQuotes: true
             }
-        })
+        }),
+        
     ],
     module:{
         rules:[
             {
+                enforce: "pre",
                 test: /\.(js|jsx)$/,
-                loader: "babel-loader",
+                exclude: /node_modules/,
+                loader: "eslint-loader",
+                options: {
+                    formatter: require("eslint-friendly-formatter"),
+                    quiet: true,
+                    emitWarning: true
+                }
+            },
+            {
+                test: /\.(js|jsx)$/,
+                loader: ["babel-loader"],
                 exclude: [ 
                     path.join(__dirname, "../node_modules")
                 ]

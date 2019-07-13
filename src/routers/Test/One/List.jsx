@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { observer, inject } from "mobx-react"
 @inject('test', 'create')
 @observer
 
-export default class Main extends Component {
+class Main extends Component {
+    static propTypes = {
+        test: PropTypes.object
+    }
     constructor(props) {
         super(props);
         this.state = {};
@@ -19,3 +23,4 @@ export default class Main extends Component {
         );
     }
 }
+export default Main;

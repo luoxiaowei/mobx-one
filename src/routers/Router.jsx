@@ -37,7 +37,7 @@ class Main extends Component {
             <Provider {...stores}>
                 <Router history={history}>
                     <Route 
-                        render={({ location }) => {
+                        render={() => {
                             return (
                                 <Layout>
                                     <Switch>
@@ -52,12 +52,6 @@ class Main extends Component {
             </Provider>
         );
     }
-}
-
-if (module.hot) { // 启用热更新
-	module.hot.accept(routers, () => {
-		console.log('[HRM] routers Callback');
-	});
 }
 
 export default Main;

@@ -19,7 +19,7 @@ export default class Main extends Component {
     render() {
         return (
             <div style={{ height: 2000 }} className={'flexac flex w1'}>
-                create哈哈
+                create哈哈d
             </div>
         );
     }

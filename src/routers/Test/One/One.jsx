@@ -17,15 +17,15 @@ export default class Main extends Component {
     handleClick = () => {
         this.setState({
             color: Math.random()
-        })
+        });
     }
 
     render() {
         return (
             <div>
                 <div className={styles.cgreen}>one{this.state.color}</div>
-                <List/>
-                <button onClick={this.handleClick} className={'cred'}>btn</button>
+                <List />
+                <button onClick={this.handleClick} className={'cred'}>xx</button>
             </div>
         );
     }
