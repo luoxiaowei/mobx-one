@@ -16,12 +16,12 @@ class Main extends Component{
             {
                 title: '充值金额',
                 dataIndex: 'amount',
-                width: '16%',
+                width: '12%',
             },
             {
                 title: '转账截图',
                 dataIndex: 'image',
-                width: '24%',
+                width: '18%',
                 render: (text) => {
                     return (
                         <Image alt={text} src={text} />
@@ -31,7 +31,7 @@ class Main extends Component{
             {
                 title: '会员号',
                 dataIndex: 'bank_number',
-                width: '16%',
+                width: '14%',
             },
             {
                 title: '充值账户',
@@ -40,19 +40,54 @@ class Main extends Component{
             },
             {
                 title: '时间',
-                dataIndex: 'time',
+                dataIndex: 'create_time',
                 width: '16%',
             },
             {
                 title: '状态',
-                dataIndex: 'time',
-                // width: '%',
+                dataIndex: 'status',
+                width: '14%',
+                render: (text) => {
+                    return (
+                        <div className={'plr15'}>{this.props.order.statusOption[text]}</div>
+                    );
+                }
+            },
+            {
+                title: '操作',
+                render: (text, record) => {
+                    return record.status == '0' ? (
+                        <div className={'operate'}>
+                            <Popconfirm
+                                title={'确定通过吗？'}
+                                onConfirm={() => this.handleChangeStatus(record.id, '1')}
+                                okText="确定"
+                                cancelText="取消"
+                            ><span>通过</span></Popconfirm>
+                            <Popconfirm
+                                title={'确定拒绝吗？'}
+                                onConfirm={() => this.handleChangeStatus(record.id, '2')}
+                                okText="确定"
+                                cancelText="取消"
+                            ><span>拒绝</span></Popconfirm>
+                        </div>
+                    ) : null;
+                }
             }
         ];
     }
 
     componentDidMount() {
         this.props.order.getOrderList();
+    }
+
+    handleChangeStatus = (id, status) => {
+        this.props.order.getOrderChangeStatus({
+            id, 
+            status
+        }, () => {
+            this.props.order.getOrderList();
+        })
     }
 
     render () {

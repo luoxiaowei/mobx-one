@@ -22,17 +22,22 @@ class BankCardStore {
         });
     }
 
+    @action async getBankList(cb) {
+        const result = await ajax.get(api.getBankList);
+        cb && cb(result);
+    }
+
     @action async delBankCardItem(id, cb) { 
         const result = await ajax.get(api.delBankCardItem, { params: { id } });
         cb && cb(result);
     }
 
     @action async addBankCardItem(params, cb) { 
-        const result = await ajax.get(api.addBankCardItem, params);
+        const result = await ajax.post(api.addBankCardItem, params);
         cb && cb(result);
     }
     @action async editBankCardItem(id, params, cb) { 
-        const result = await ajax.get(api.editBankCardItem + '?id=' + id, params);
+        const result = await ajax.post(api.editBankCardItem + '?id=' + id, params);
         cb && cb(result);
     }
 }

@@ -11,7 +11,11 @@ class OrderStore {
         page: 1, 
         pageSize: 10
     };
-
+    @observable statusOption = {
+        '0': '审核中',
+        '1': '充值成功', 
+        '2': '充值失败'
+    };
     @action async getOrderList() { 
         this.loading = true;
         const result = await ajax.get(api.getOrderList, { params: this.filter });
@@ -20,6 +24,10 @@ class OrderStore {
             this.total = result.total;
             this.loading = false;
         });
+    }
+    @action async getOrderChangeStatus(params, cb) { 
+        const result = await ajax.get(api.getOrderChangeStatus, { params: params });
+        cb && cb(result);
     }
 }
 

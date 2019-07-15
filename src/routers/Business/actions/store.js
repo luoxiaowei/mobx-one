@@ -28,11 +28,11 @@ class BusinessStore {
     }
 
     @action async addBusinessItem(params, cb) { 
-        const result = await ajax.get(api.addBusinessItem, params);
+        const result = await ajax.post(api.addBusinessItem, params);
         cb && cb(result);
     }
     @action async editBusinessItem(id, params, cb) { 
-        const result = await ajax.get(api.editBusinessItem + '?id=' + id, params);
+        const result = await ajax.post(api.editBusinessItem + '?id=' + id, params);
         cb && cb(result);
     }
 }

@@ -1,6 +1,7 @@
 
 const CommonConfig = require("./webpack.config");
 const path = require("path");
+const net = require("net");
 
 const localIp = (() => { // 获取当前IP
 	let ips = [];
@@ -16,6 +17,20 @@ const localIp = (() => { // 获取当前IP
 	}
 	return ips[0] || 'localhost';
 })();
+
+const localPort = ((port) => { // 获取当前IP
+    let server = net.createServer().listen(port)
+    server.on('listening', function () { // 执行这块代码说明端口未被占用
+        server.close() // 关闭服务
+        return port;
+    })
+    
+    server.on('error', function (err) {
+        if (err.code === 'EADDRINUSE') { // 端口已经被使用
+            return localPort(port + 1);
+        }
+    })
+})(7000);
 
 module.exports = {
     ...CommonConfig,
@@ -35,7 +50,7 @@ module.exports = {
         hot:true,
         inline: true,
         overlay: true, // 编译器错误或警告时， 在浏览器中显示全屏覆盖
-        port: 7000,
+        port: localPort,
         host: localIp, 
         open: true,
         clientLogLevel: "none", // 模块热替换时不在控制台显示消息

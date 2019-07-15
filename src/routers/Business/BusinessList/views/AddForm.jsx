@@ -33,11 +33,13 @@ class AddForm extends React.Component {
             if (formValue.id) {
                 this.props.business.editBusinessItem(formValue.id, params, () => {
                     message.success('操作成功');
+                    this.props.business.getBusinessList();
                     this.props.onCancel && this.props.onCancel();
                 });
             } else {
                 this.props.business.addBusinessItem(params, () => {
                     message.success('操作成功');
+                    this.props.business.getBusinessList();
                     this.props.onCancel && this.props.onCancel();
                 });
             }

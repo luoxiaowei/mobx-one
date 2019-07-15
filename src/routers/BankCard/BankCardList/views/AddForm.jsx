@@ -11,11 +11,20 @@ const Option = Select.Option;
 class AddForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { };
+        this.state = { 
+            data: [],
+            obj: {}
+        };
     }
 
     componentDidMount() {
-        
+        this.props.bankCard.getBankList((res) => {
+            let keys = Object.keys(res.data);
+            this.setState({
+                data: keys.map(item => ({ ...res.data[item], id: item })),
+                obj: res.data
+            });
+        });
     }
 
     handleCancel = () => {
@@ -29,21 +38,27 @@ class AddForm extends React.Component {
             if (err) {
                 return;
             }
-            let params = { ...values };
+            let params = { ...values, bank_name: this.state.obj[values.bank_sign].bank_name };
             if (formValue.id) {
                 this.props.bankCard.editBankCardItem(formValue.id, params, () => {
                     message.success('操作成功');
+                    this.props.bankCard.getBankCardList();
                     this.props.onCancel && this.props.onCancel();
                 });
             } else {
                 this.props.bankCard.addBankCardItem(params, () => {
                     message.success('操作成功');
+                    this.props.bankCard.getBankCardList();
                     this.props.onCancel && this.props.onCancel();
                 });
             }
             
         });
 
+    }
+
+    handleClickSeclect = () => {
+        
     }
 
     render() {
@@ -83,11 +98,21 @@ class AddForm extends React.Component {
                         </Col>
                         <Col span={24}>
                             <FormItem label={'开户行'} { ...formItemLayout }>
-                                {getFieldDecorator('bank_name', {
-                                    initialValue: formValue.bank_name || '',
+                                {getFieldDecorator('bank_sign', {
+                                    initialValue: formValue.bank_sign || '',
                                     rules: [{ required: true, message: '不能为空' }]
                                 })(
-                                    <Input placeholder="请输入开户行" maxLength={100} />
+                                    <Select 
+                                        placeholder="请选择开户行"
+                                        maxLength={100}
+                                        onClick={this.handleClickSeclect}
+                                    >
+                                        {this.state.data.map(item => {
+                                            return (
+                                                <Option value={item.id} key={item.id}>{item.bank_name}</Option>
+                                            );
+                                        })}
+                                    </Select>
                                 )}
                             </FormItem>
                         </Col>

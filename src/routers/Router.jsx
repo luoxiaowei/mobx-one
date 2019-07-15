@@ -41,7 +41,7 @@ class Main extends Component {
                             return (
                                 <Layout menuList={routers} location={location}>
                                     <Switch>
-                                        <Route path='/' exact render={() => (<Redirect to={'/create'} />)}/>
+                                        <Route path='/' exact render={() => (<Redirect to={'/bankCardList'} />)}/>
                                         {this.renderRoute(routers)}
                                     </Switch>
                                 </Layout>
