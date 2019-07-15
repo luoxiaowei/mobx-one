@@ -21,22 +21,32 @@ class Main extends Component{
             {
                 title: '转账截图',
                 dataIndex: 'image',
-                width: '30%',
+                width: '24%',
                 render: (text) => {
                     return (
-                        <Image alt={text} src={'text'} />
+                        <Image alt={text} src={text} />
                     );
                 }
             },
             {
+                title: '会员号',
+                dataIndex: 'bank_number',
+                width: '16%',
+            },
+            {
                 title: '充值账户',
                 dataIndex: 'bank_number',
-                width: '24%',
+                width: '14%',
             },
             {
                 title: '时间',
                 dataIndex: 'time',
-                // width: '20%',
+                width: '16%',
+            },
+            {
+                title: '状态',
+                dataIndex: 'time',
+                // width: '%',
             }
         ];
     }
@@ -45,16 +55,7 @@ class Main extends Component{
         this.props.order.getOrderList();
     }
 
-    handleEdit = (info) => {
-
-    }
-
-    handleDel = (id) => {
-
-    }
-
     render () {
-        console.log(this.props, 123);
         const { list, total, loading, id, filter } = this.props.order;
         const listProps = {
             list,

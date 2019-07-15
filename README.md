@@ -38,3 +38,14 @@
   `bank_number`  '银行卡号',
   `bank_name` '开户行',
   `name`  '姓名',
+
+订单列表 http://154.92.18.182/api/admin/orders/list
+订单审核 http://154.92.18.182/api/admin/orders/verify?id=1&status=1  0审核中 1充值成功 2充值失败
+银行卡添加：http://154.92.18.182/api/admin/bank/create
+银行卡编辑：http://154.92.18.182/api/admin/bank/edit?id=1
+银行卡删除：http://154.92.18.182/api/admin/bank/delete?id=1
+银行卡列表：http://154.92.18.182/api/admin/bank/list
+商户添加：http://154.92.18.182/api/admin/merchant/create
+商户编辑：http://154.92.18.182/api/admin/merchant/edit?id=1
+商户删除：http://154.92.18.182/api/admin/merchant/delete?id=1
+商户列表：http://154.92.18.182/api/admin/merchant/list

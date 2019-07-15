@@ -18,15 +18,15 @@ ajax.interceptors.request.use(function (config) {
 ajax.interceptors.response.use(function (response) {
     // 对响应数据做点什么
     let data = response.data;
-    if (data.success) {
+    console.log(response);
+    if (data.errcode == 0) {
         return response.data;
     } else {
-        message.error(data.msg || '网络不稳定，请稍后再试～');
+        return message.error(data.msg || '网络不稳定，请稍后再试～');
     }
-    
 }, function (error) {
     // 对响应错误做点什么
-    console.log(error.response.statusText);
+    console.log(error);
     return Promise.reject({
         success: false,
         data: null,

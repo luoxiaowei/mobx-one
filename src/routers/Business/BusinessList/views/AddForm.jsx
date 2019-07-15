@@ -5,7 +5,7 @@ import { Form, Input, Row, Col, Modal, Select, message } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-@inject('bankCard')
+@inject('business')
 @observer
 
 class AddForm extends React.Component {
@@ -31,12 +31,12 @@ class AddForm extends React.Component {
             }
             let params = { ...values };
             if (formValue.id) {
-                this.props.bankCard.editBankCardItem(formValue.id, params, () => {
+                this.props.business.editBusinessItem(formValue.id, params, () => {
                     message.success('操作成功');
                     this.props.onCancel && this.props.onCancel();
                 });
             } else {
-                this.props.bankCard.addBankCardItem(params, () => {
+                this.props.business.addBusinessItem(params, () => {
                     message.success('操作成功');
                     this.props.onCancel && this.props.onCancel();
                 });
@@ -62,7 +62,7 @@ class AddForm extends React.Component {
         };
         return (
             <Modal
-                title={formValue.id ? '编辑银行卡' : '添加银行卡'}
+                title={formValue.id ? '编辑商户' : '添加商户'}
                 visible={visible}
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
@@ -72,32 +72,32 @@ class AddForm extends React.Component {
                 <Form>
                     <Row>
                         <Col span={24}>
-                            <FormItem label={'姓名'} { ...formItemLayout }>
+                            <FormItem label={'商户名称'} { ...formItemLayout }>
                                 {getFieldDecorator('name', {
                                     initialValue: formValue.name || '',
                                     rules: [{ required: true, message: '不能为空' }]
                                 })(
-                                    <Input placeholder="请输入姓名" maxLength={100} />
+                                    <Input placeholder="请输入商户名称" maxLength={100} />
                                 )}
                             </FormItem>
                         </Col>
                         <Col span={24}>
-                            <FormItem label={'开户行'} { ...formItemLayout }>
-                                {getFieldDecorator('bank_name', {
-                                    initialValue: formValue.bank_name || '',
+                            <FormItem label={'商户登录账号'} { ...formItemLayout }>
+                                {getFieldDecorator('account', {
+                                    initialValue: formValue.account || '',
                                     rules: [{ required: true, message: '不能为空' }]
                                 })(
-                                    <Input placeholder="请输入开户行" maxLength={100} />
+                                    <Input placeholder="请输入商户登录账号" maxLength={100} />
                                 )}
                             </FormItem>
                         </Col>
                         <Col span={24}>
-                            <FormItem label={'银行卡号'} { ...formItemLayout }>
-                                {getFieldDecorator('bank_number', {
-                                    initialValue: formValue.bank_number || '',
-                                    rules: [{ required: true, message: '不能为空' }]
+                            <FormItem label={'密码'} { ...formItemLayout }>
+                                {getFieldDecorator('password', {
+                                    initialValue: '',
+                                    rules: [{ required: !formValue.id, message: '不能为空' }]
                                 })(
-                                    <Input placeholder="请输入银行卡号" maxLength={100} />
+                                    <Input placeholder={formValue.id ? '如要更改，请输入密码' : '请输入密码'} maxLength={100} />
                                 )}
                             </FormItem>
                         </Col>

@@ -1,5 +1,5 @@
 import React from 'react';
-export default class Image extends React.Component{
+export default class ImageBox extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -8,20 +8,20 @@ export default class Image extends React.Component{
     }
     componentDidMount() {
         const { src } = this.props;
-        var img = new Image();  
+        let img = new Image();  
+        img.src = src; 
         img.onload = () => {
             this.setState({ isImg: true });
         };  
         img.onerror = () => {
             this.setState({ isImg: false });
         };  
-        img.src = src;  
     }
     render() {
         const { src, alt } = this.props;
         return (
             <div className={'wh100'}>
-                {this.state.isImg ?  <img src={src} alt={alt} /> : <img src={require('static/default.png')} />}
+                {this.state.isImg ?  <img src={src} alt={alt} /> : <img src={require('static/default.png')} alt={alt} />}
             </div>
         );
     }

@@ -16,6 +16,6 @@ export default {
         'password': '登录密码',
         'order_sn': '订单号',
         'amount': '充值金额',
-        'image': '转账截图',
+        'image': 'sssss',
     }]
 };

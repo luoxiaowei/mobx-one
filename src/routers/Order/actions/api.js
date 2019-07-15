@@ -1,3 +1,3 @@
 export default {
-    getOrderList: '/api/list',
+    getOrderList: '/api/admin/orders/list',
 };

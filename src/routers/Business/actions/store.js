@@ -21,6 +21,20 @@ class BusinessStore {
             this.loading = false;
         });
     }
+
+    @action async delBusinessItem(id, cb) { 
+        const result = await ajax.get(api.delBusinessItem, { params: { id } });
+        cb && cb(result);
+    }
+
+    @action async addBusinessItem(params, cb) { 
+        const result = await ajax.get(api.addBusinessItem, params);
+        cb && cb(result);
+    }
+    @action async editBusinessItem(id, params, cb) { 
+        const result = await ajax.get(api.editBusinessItem + '?id=' + id, params);
+        cb && cb(result);
+    }
 }
 
 export default BusinessStore;

@@ -27,8 +27,12 @@ class BankCardStore {
         cb && cb(result);
     }
 
-    @action async postBankCardItem(params, cb) { 
-        const result = await ajax.get(api.postBankCardItem, params);
+    @action async addBankCardItem(params, cb) { 
+        const result = await ajax.get(api.addBankCardItem, params);
+        cb && cb(result);
+    }
+    @action async editBankCardItem(id, params, cb) { 
+        const result = await ajax.get(api.editBankCardItem + '?id=' + id, params);
         cb && cb(result);
     }
 }
