@@ -37,11 +37,11 @@ class Main extends Component {
             <Provider {...stores}>
                 <Router history={history}>
                     <Route 
-                        render={() => {
+                        render={({ location }) => {
                             return (
-                                <Layout>
+                                <Layout routers={routers} location={location}>
                                     <Switch>
-                                        <Route path='/' exact render={() => (<Redirect to={'/create'} />)}/>
+                                        <Route path='/' exact render={() => (<Redirect to={'/amount'} />)}/>
                                         {this.renderRoute(routers)}
                                     </Switch>
                                 </Layout>

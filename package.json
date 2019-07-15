@@ -4,10 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "npm run dev && npm run create",
+		"start": "npm run dev",
 		"dev": "webpack-dev-server --config webpack/webpack.config.dev.js --progress --color",
 		"dist": "webpack --config webpack/webpack.config.prd.js",
-		"create": "node webpack/helper/create.js",
 		"lint": "eslint --fix --ext .jsx,.js src/"
 	},
 	"repository": {

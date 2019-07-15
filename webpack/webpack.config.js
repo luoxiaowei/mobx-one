@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
     entry: path.join(__dirname, '../src/index.js'), //工程入口文件,
     output:{
-        filename: 'js/[name].[hash].js',
+        filename: 'js/[name].[hash:7].js',
         path: path.join(__dirname, '../dist'),
         publicPath: '/'
     },
@@ -69,8 +69,8 @@ module.exports = {
     resolve: {
         extensions: [".jsx", ".js"],
         alias: {
-            components: path.resolve(__dirname, "src/components"),
-            utils: path.resolve(__dirname, "src/utils"),
+            components: path.resolve(__dirname, "../src/components"),
+            utils: path.resolve(__dirname, "../src/utils"),
         }
     }
 }

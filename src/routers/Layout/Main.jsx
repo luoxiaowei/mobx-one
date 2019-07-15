@@ -10,19 +10,35 @@ export default class Main extends Component {
         super(props);
         this.state = {};
     }
-
+    getTitle = (key) => {
+        const { routers } = this.props;
+        let title = '';
+        const run = (list, pid) => {
+            list.forEach(item => {
+                if(key == item.path) {
+                    title = item.title;
+                }
+                if (item.childs && item.childs.length > 0) {
+                    run(item.childs, item.path);
+                }
+            })
+        }
+        run(routers);
+        return title;
+    }
     render() {
-        const { children } = this.props;
+        const { children, location } = this.props;
         return (
             <div>
-                <div className={'test'}/>
-                <div className={'test2'}/>
-                <div>月份layout layout layout layout layout layout</div>
-                <Link to={'/one'}>one</Link><br/>
-                <Link to={'/two'}>two</Link><br/>
-                <Link to={'/create'}>create1</Link><br/>
+                <div className={'header'}>
+                    {this.getTitle(location.pathname)}
+                </div>
                 { children }
             </div>
         );
     }
 }
+
+Main.defaultProps = {
+    title: ''
+};
