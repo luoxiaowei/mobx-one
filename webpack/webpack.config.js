@@ -14,7 +14,7 @@ const Theme = lessToJs(paletteLess, {
 module.exports = {
     entry: path.join(__dirname, '../src/index.js'), //工程入口文件,
     output:{
-        filename: 'js/[name].[hash].js',
+        filename: 'js/[name].[hash:7].js',
         path: path.join(__dirname, '../dist'),
         publicPath: '/'
     },
@@ -85,8 +85,12 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(jpg|png|jpeg)$/,
-                loader:"url-loader"
+                test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/i,
+                loader: "url-loader",
+                options: {
+                    limit: 10000,//图片大小
+                    name: 'static/[name].[hash:7].[ext]'
+                }
             }
         ]
     },
@@ -95,6 +99,7 @@ module.exports = {
         alias: {
             components: path.resolve(__dirname, "../src/components"),
             utils: path.resolve(__dirname, "../src/utils"),
+            static: path.resolve(__dirname, "../static"),
         }
     }
 }

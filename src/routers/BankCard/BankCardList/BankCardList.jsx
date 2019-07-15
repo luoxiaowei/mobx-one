@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { observer, inject } from "mobx-react";
 import { Popconfirm, message, Button } from 'antd';
-import { List, Image } from 'components/Common';
+import { List } from 'components/Common';
+import Search from './views/Search';
+import AddForm from './views/AddForm';
 
 @inject('bankCard')
 @observer
@@ -9,7 +11,9 @@ import { List, Image } from 'components/Common';
 class Main extends Component{
 	constructor (props) {
         super(props);
-        this.state = { };
+        this.state = { 
+            visible: false
+        };
         this.modalKey = 1;
         this.columns = [
             {
@@ -60,8 +64,11 @@ class Main extends Component{
         this.props.bankCard.getBankCardList();
     }
 
-    handleEdit = (info) => {
-
+    handleEdit = (formValue) => {
+        this.setState({
+            formValue,
+            visible: true,
+        });
     }
 
     handleDel = (id) => {
@@ -70,10 +77,20 @@ class Main extends Component{
             this.props.bankCard.getBankCardList();
         })
     }
+    handleAdd = () => {
+        this.setState({
+            visible: true
+        });
+    }
+
+    handleCancel = () => {
+        this.setState({ 
+            visible: false, 
+            formValue: {} 
+        });
+    }
 
     render () {
-        console.log(this.props, 123);
-       
         const { list, total, loading, id, filter } = this.props.bankCard;
         const listProps = {
             list,
@@ -87,9 +104,19 @@ class Main extends Component{
             id,
             columns: this.columns
         };
+        const searchProps = {
+            right: <Button onClick={this.handleAdd}>添加银行卡</Button>
+        };
+        const addFormProps = {
+            visible: this.state.visible,
+            formValue: this.state.formValue,
+            onCancel: this.handleCancel
+        };
         return (
             <div>
+                <Search {...searchProps}/>
                 <List {...listProps} />
+                <AddForm {...addFormProps}/>
             </div>
         );
     }

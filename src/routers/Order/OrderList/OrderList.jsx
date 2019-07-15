@@ -22,9 +22,9 @@ class Main extends Component{
                 title: '转账截图',
                 dataIndex: 'image',
                 width: '30%',
-                return: (text) => {
+                render: (text) => {
                     return (
-                        <img src={text} />
+                        <Image alt={text} src={'text'} />
                     );
                 }
             },

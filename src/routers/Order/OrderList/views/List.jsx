@@ -41,7 +41,7 @@ class OrderList extends React.Component {
                         return (
                             <div key={'tr' + i} className={'mb10'} style={{ border: '1px solid #e8e8e8', borderRight: 'none' }}>
                                 <div className={'p10'} style={{ background: '#eee' }}>
-                                    <span className={'fs16 pr10'}>订单号: 
+                                    <span className={'pr10'}>订单号: 
                                         {record.orders_sn}
                                     </span>
                                 </div>

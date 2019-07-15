@@ -26,6 +26,11 @@ class BankCardStore {
         const result = await ajax.get(api.delBankCardItem, { params: { id } });
         cb && cb(result);
     }
+
+    @action async postBankCardItem(params, cb) { 
+        const result = await ajax.get(api.postBankCardItem, params);
+        cb && cb(result);
+    }
 }
 
 export default BankCardStore;
