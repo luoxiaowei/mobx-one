@@ -1,0 +1,41 @@
+@import "../../styles/variables.less";
+
+.uploadImg {
+    display: flex;
+    ._imgbox {
+        position: relative;
+        width: 120px;
+        min-height: 120px;
+        // height: 88px;
+        margin-right: 10px;
+        ._del {
+            position: absolute;
+            top: 9px;
+            left: 90px;
+            z-index: 888;
+        }
+    }
+    ._img {
+        width: 120px;
+        min-height: 120px;
+    }
+    .uploadImg {
+        border: 1px solid @border-color;
+        width: 120px;
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        
+        ._input {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+    }
+
+}  

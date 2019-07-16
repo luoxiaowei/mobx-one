@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { UploadImg, Toast } from 'components';
 import List from './List';
 import styles from './One.less';
 
@@ -12,6 +12,14 @@ export default class Main extends Component {
     }
 
     componentDidMount() {
+        // Toast.hide();
+        // Toast.info('123', 0);
+        // setTimeout(() => {
+        //     Toast.info('222', 3);
+        // }, 2000)
+        // setTimeout(() => {
+        //     // Toast.hide();
+        // }, 5000)
     }
 
     handleClick = () => {
@@ -24,7 +32,7 @@ export default class Main extends Component {
         return (
             <div>
                 <div className={styles.cgreen}>one{this.state.color}</div>
-                <List />
+                <UploadImg />
                 <button onClick={this.handleClick} className={'cred'}>xx</button>
             </div>
         );

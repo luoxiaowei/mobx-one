@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import history from 'utils/history';
 import { observer, inject } from "mobx-react";
-import { Iconfont } from 'components/Common';
+import { Iconfont } from 'components';
 @inject('create')
 @observer
 

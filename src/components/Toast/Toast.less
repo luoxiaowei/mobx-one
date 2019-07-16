@@ -1,0 +1,59 @@
+@import "../../styles/variables.less";
+
+.toast {
+    ._bg{
+        position: fixed;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 3999;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: 0;
+        opacity: 0;
+    }
+    ._fixed{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4001;
+        display: flex;
+        align-items: center;
+        background: white;
+        max-width: 50%;
+        height: auto;
+        background: rgba(58, 58, 58, 0.9);
+        padding: unit(6, @unit) / @base unit(15, @unit) / @base;
+        border-radius: unit(6, @unit) / @base;
+        line-height: 1.5;
+        color: #fff;
+        text-align: center;
+        word-break: break-all;
+    }
+    .success {
+        font-size: unit(30, @unit) / @base;
+        color: @success;
+    }
+    .fail {
+        font-size: unit(30, @unit) / @base;
+        color: @fail;
+    }
+    .loading {
+        animation: loading 1.5s linear infinite;
+        font-size: unit(30, @unit) / @base;
+        color: #cfcfcf;
+    }
+    .pl8 {
+        padding-left: unit(8, @unit) / @base;
+    }
+    @keyframes loading {
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+}

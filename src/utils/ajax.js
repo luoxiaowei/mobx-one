@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { Toast } from 'components/Common';
+import { Toast } from 'components';
 const ajax = axios.create({
     timeout: 3000,
     withCredentials: true, // 支持跨域
-    baseURL: 'http://154.92.18.182'
+    // baseURL: 'http://154.92.18.182'
 });
 
 // 添加请求拦截器

@@ -30,43 +30,4 @@
         max-height: 10vh;
         text-align: center;
     }
-    
-    .toast {
-        ._bg{
-            position: fixed;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 3999;
-            height: 100%;
-            width: 100%;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            bottom: 0;
-            opacity: 0;
-        }
-        ._fixed{
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            z-index: 4001;
-    
-            background: white;
-            max-width: 50%;
-            height: auto;
-            background: rgba(58, 58, 58, 0.9);
-            padding: unit(18, @unit) / @base unit(30, @unit) / @base;
-            border-radius: unit(6, @unit) / @base;
-            line-height: 1.5;
-            color: #fff;
-            text-align: center;
-    
-            animation-fill-mode: both; // 以动画最终值展示
-            animation: commonToastFadeEnter .5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            &._leave {
-                opacity: 0;
-                animation: commonToastFadeLeave .2s cubic-bezier(0.55, 0, 0.55, 0.2);
-            }
-        }
-    }
 }   

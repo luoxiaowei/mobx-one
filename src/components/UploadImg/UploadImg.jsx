@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { Iconfont, Toast } from '../index';
+import styles from './UploadImg.less';
 
 export default class UploadImg extends React.PureComponent {
     constructor(props) {
@@ -73,7 +75,7 @@ export default class UploadImg extends React.PureComponent {
                     let formData = new FormData();
                     formData.append('file', file);
                     let xhr = new XMLHttpRequest();
-                    xhr.open('POST', api.uploadImg, true);
+                    xhr.open('POST', '/api/wap/upload/index', true);
                     xhr.send(formData);
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === 4) {
@@ -104,14 +106,14 @@ export default class UploadImg extends React.PureComponent {
         const { className, limit } = this.props;
         const { imgURL } = this.state;
         return (
-            <div className={`${className} uplaod`}>
+            <div className={`${className} ${styles.uploadImg}`}>
                 {imgURL && imgURL.map((item, index) => {
                     return (
-                        <div key={item + index} className={'_imgbox'}>
+                        <div key={item + index} className={styles._imgbox}>
                             <img 
                                 alt={''} 
                                 src={item} 
-                                className={'_img'} 
+                                className={styles._img} 
                                 onClick={() => {
                                     window.WeixinJSBridge && window.WeixinJSBridge.invoke("imagePreview", {
                                         "urls": [item],
@@ -119,20 +121,21 @@ export default class UploadImg extends React.PureComponent {
                                     });
                                 }}
                             />
-                            <Icon onClick={() => this.handleDel(index)} className={'_del'} type={'shangchu'} />
+                            <Iconfont onClick={() => this.handleDel(index)} className={styles._del} type={'del'} />
                         </div> 
                     );
                 })}
-                {imgURL.length < limit && <div className={'uploadImg'}>
+                {imgURL.length < limit && <div className={styles.uploadImg}>
                     <input
                         type="file"
                         accept="image/jpg,image/jpeg,image/png,image/gif,image/bmp"
                         onChange={this.handleFile}
                         onClick={(e) => e.stopPropagation()}
-                        ref="upload"
-                        className={'_input'}
+                        ref='upload'
+                        className={styles._input}
+                        multiple={limit > 1}
                     />
-                    <Icon type={'add1'} />
+                    <Iconfont type={'add'} />
                 </div>}
             </div>
         );
@@ -140,6 +143,6 @@ export default class UploadImg extends React.PureComponent {
 }
 UploadImg.defaultProps = {
     className: '',
-    limit: 1,
+    limit: 2,
     defaultImg: []
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import history from 'utils/history';
 import { observer, inject } from "mobx-react";
-import { Toast } from 'components/Common';
+import { UploadImg } from 'components';
 @inject('create')
 @observer
 
@@ -28,10 +28,10 @@ export default class Main extends Component {
             history.go(-1);
         }
         return (
-            <div className={'flexfc flexjc p15'} style={{ height: '90vh' }}>
+            <div className={'flexfc flexjc p15'} style={{ height: '75vh' }}>
                 <div className={'flexac pb20'}>
                     <div className={'w3'}>上传图片：</div>
-                    <input className={'col'}/>
+                    <UploadImg />
                 </div>
                 <div className={'flexac pb20'}>
                     <div className={'w3'}>会员账号：</div>

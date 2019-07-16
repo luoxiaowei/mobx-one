@@ -13,7 +13,7 @@ class Main extends Component {
         this.state = {};
     }
     componentDidMount() {
-        this.props.test.getUserList();
+        // this.props.test.getUserList();
     }
 
     render() {
