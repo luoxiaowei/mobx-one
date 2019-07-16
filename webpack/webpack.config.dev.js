@@ -57,8 +57,8 @@ module.exports = {
         clientLogLevel: "none", // 模块热替换时不在控制台显示消息
         proxy: {
             "/api": {
-                target: "http://154.92.18.182",
-                pathRewrite: {"" : ""}
+                target: "http://154.92.18.182/api/wap",
+                pathRewrite: {"/api" : ""}
             }
         }
     },

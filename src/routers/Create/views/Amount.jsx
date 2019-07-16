@@ -34,7 +34,18 @@ export default class Main extends Component {
                 </div>
                 <div className={'pb20'}>
                     <div className={'pb5'}>存款金额</div>
-                    <input value={this.props.create.amount} type={'number'} onChange={this.handleChange} placeholder={'请输入存款金额'} />
+                    <input 
+                        value={this.props.create.amount}
+                        type={'number'} 
+                        onChange={this.handleChange} 
+                        placeholder={'请输入存款金额'} 
+                        onFocus={() => {
+                            this.top = document.body.scrollTop;
+                        }}
+                        onBlur={() => {
+                            document.body.scrollTop = this.top || 0;
+                        }}
+                    />
                 </div>
                 <span className={'fs12 pb20 cwarn'}>请注意：此金额需和实际支付金额相同，否则将无法自动上分</span>
                 <div className={'flexjc pt20'}>

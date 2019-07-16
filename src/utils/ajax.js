@@ -22,11 +22,11 @@ ajax.interceptors.response.use(function (response) {
     if (data.errcode == 0) {
         return response.data;
     } else {
-        Toast.info(data.msg || '网络不稳定，请稍后再试～');
+        Toast.info(data.errmsg || '网络不稳定，请稍后再试～');
         return Promise.reject({
             success: false,
             data: null,
-            msg: data.msg || '网络不稳定，请稍后再试～'
+            msg: data.errmsg || '网络不稳定，请稍后再试～'
         });
     }
     

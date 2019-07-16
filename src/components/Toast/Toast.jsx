@@ -63,11 +63,9 @@ class Toast extends Component {
 		this.div = ToastsStatics.div;
 	}
 	static hide = () => {
-		console.dir(this, 123);
-		if (this.div) {
+		if (this.div && this.div.innerHTML) {
 			ReactDOM.unmountComponentAtNode(this.div);
 			Dom.removeChild(this.div);
-			this.div = null;
 		}
 		
 	};
@@ -80,8 +78,6 @@ class Toast extends Component {
 	handleClose = (e) => {
 		e && e.preventDefault();
 		e && e.stopPropagation();
-		console.dir(this);
-		this.div = null;
 		this.refs.fixed.classList.add(styles._leave);
 		this.duration && clearTimeout(this.duration);
 		this.timer = setTimeout(() => {
