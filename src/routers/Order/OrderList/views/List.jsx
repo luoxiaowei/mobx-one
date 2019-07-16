@@ -49,7 +49,7 @@ class OrderList extends React.Component {
                                     {this.columns.map((item, index) => {
                                         return (
                                             <div key={'tr' + i + 'td' + index} className={`tl flexac ${(index + 1) == this.columns.length && 'col'}`} style={{ width: item.width, borderRight: '1px solid #e8e8e8' }}>
-                                                {item.render ? item.render(record[item.dataIndex], record) : <div style={{ padding: '16px' }} className={'h100 flexac'}><span>{record[item.dataIndex]}</span></div>}
+                                                {item.render ? item.render(record[item.dataIndex], record) : <div style={{ padding: '16px' }} className={'h100 flexac break'}><span>{record[item.dataIndex]}</span></div>}
                                             </div>
                                         );
                                     })}

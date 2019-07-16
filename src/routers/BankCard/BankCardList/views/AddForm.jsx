@@ -126,7 +126,16 @@ class AddForm extends React.Component {
                                 )}
                             </FormItem>
                         </Col>
-                        
+                        <Col span={24}>
+                            <FormItem label={'当日转账额度'} { ...formItemLayout }>
+                                {getFieldDecorator('max_amount', {
+                                    initialValue: formValue.max_amount || '',
+                                    rules: [{ required: true, message: '不能为空' }]
+                                })(
+                                    <Input placeholder="请输入当日转账额度" maxLength={100} />
+                                )}
+                            </FormItem>
+                        </Col>
                     </Row>
                 </Form>
             </Modal>

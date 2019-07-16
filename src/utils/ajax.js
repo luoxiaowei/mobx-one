@@ -18,11 +18,12 @@ ajax.interceptors.request.use(function (config) {
 ajax.interceptors.response.use(function (response) {
     // 对响应数据做点什么
     let data = response.data;
-    console.log(response);
-    if (data.errcode == 0) {
+    if (data.errcode == 302) {
+        history.push('/login');
+    } else if (data.errcode == 0) {
         return response.data;
     } else {
-        return message.error(data.msg || '网络不稳定，请稍后再试～');
+        message.error(data.msg || '网络不稳定，请稍后再试～');
     }
 }, function (error) {
     // 对响应错误做点什么

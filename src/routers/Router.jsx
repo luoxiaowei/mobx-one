@@ -3,6 +3,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import history from '../utils/history';
 import Layout from './Layout/Main';
+import Login from './Login/views/Login';
 
 let routers = [];
 let stores = {};
@@ -38,14 +39,20 @@ class Main extends Component {
                 <Router history={history}>
                     <Route 
                         render={({ location }) => {
-                            return (
-                                <Layout menuList={routers} location={location}>
-                                    <Switch>
-                                        <Route path='/' exact render={() => (<Redirect to={'/bankCardList'} />)}/>
-                                        {this.renderRoute(routers)}
-                                    </Switch>
-                                </Layout>
-                            )
+                            if (location.pathname === '/login') {
+                                return (
+                                    <Route path={'/login'} component={Login} />
+                                );
+                            } else {
+                                return (
+                                    <Layout menuList={routers} location={location}>
+                                        <Switch>
+                                            <Route path='/' exact render={() => (<Redirect to={'/bankCardList'} />)}/>
+                                            {this.renderRoute(routers)}
+                                        </Switch>
+                                    </Layout>
+                                )
+                            }
                         }}
                     />
                 </Router>

@@ -29,17 +29,22 @@ class Main extends Component{
             {
                 title: '开户行',
                 dataIndex: 'bank_name',
-                width: '16%',
+                width: '14%',
             },
             {
                 title: '支付笔数',
                 dataIndex: 'recharge_times',
-                width: '14%',
+                width: '12%',
             },
             {
                 title: '支付总金额',
                 dataIndex: 'recharge_money',
-                width: '14%',
+                width: '12%',
+            },
+            {
+                title: '当日转账额度',
+                dataIndex: 'max_amount',
+                width: '12%',
             },
             {
                 title: '操作',

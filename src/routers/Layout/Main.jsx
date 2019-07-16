@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { observer, inject } from "mobx-react";
 import { Link } from 'react-router-dom';
-import { Layout, LocaleProvider, Menu, Icon, Button } from 'antd';
+import { Layout, LocaleProvider, Menu, Icon, Button, Dropdown } from 'antd';
 import zhCN from 'antd/es/locale-provider/zh_CN';
 import { Iconfont } from 'components/Common';
+import history from 'utils/history';
 const { Header, Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
+@inject('login')
+@observer
 
 export default class Main extends Component {
     static propTypes = {
@@ -61,9 +65,29 @@ export default class Main extends Component {
         return keys;
     }
 
+    handleOut = () => {
+        this.props.login.postLoginOut((res) => {
+            if (res.errcode == 0) {
+                localStorage.removeItem('webInfo');
+                history.push('/login');
+            } else {
+                message.error(res.msg || '退出失败');
+            }
+        });
+    }
+
     render() {
         const { children, menuList, location } = this.props;
         let defaultOpenKeys = this.getDefaultOpenKeys(location.pathname);
+        let webInfo = {};
+        try {
+            webInfo = JSON.parse(localStorage.getItem('webInfo'));
+        } catch(err) {
+            history.push('/login');
+        }
+        if (!webInfo || !(webInfo || {}).name) {
+            history.push('/login');
+        }
         return (
             <Layout>
                 <Sider collapsed={this.state.collapsed}>
@@ -79,13 +103,38 @@ export default class Main extends Component {
                 </Sider>
                 <Layout>
                     <Header
-                        style={{ background: '#fff', marginBottom: 10, position: 'fixed', zIndex: 1, width: '100%', borderBottom: '1px solid #f0f2f5' }}
+                        style={{ 
+                            position: 'fixed', 
+                            zIndex: 10, 
+                            borderBottom: '1px solid #f0f2f5', 
+                            width: 'calc(100% - 200px)'
+                        }}
+                        className={'w12 mb10 bgwhite'}
                     >
-                        <Icon
-                            className="trigger"
-                            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                            onClick={() => this.setState({ collapsed: !this.state.collapsed })}
-                        />
+                        <div style={{ height: '64px', lineHeight: '64px' }} className={'flexsb bgwhite'}>
+                            <div className={'flexac'}>
+                                <Icon
+                                    className="trigger"
+                                    type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                                    onClick={() => this.setState({ collapsed: !this.state.collapsed })}
+                                />
+                            </div>
+                            <div className={'flexac'}>
+                                {/* <Dropdown overlay={<Menu>
+                                        <Menu.Item>
+                                            <span>退出</span>
+                                        </Menu.Item>
+                                    </Menu>} placement="bottomCenter">
+                                    <div>
+                                        <Iconfont type={'user'} />
+                                        <span onClick={this.handleOut} className={'pl10 poi cmain'}>{(webInfo || {}).name}, 退出</span>
+                                    </div>
+                                </Dropdown> */}
+                                <Iconfont type={'user'} />
+                                <span onClick={this.handleOut} className={'pl10 poi cmain'}>{(webInfo || {}).name}, 退出</span>
+                            </div>
+                        </div>
+                        
                     </Header>
                     <Content
                         style={{ marginTop: 74 }}
