@@ -1,4 +1,4 @@
 export default {
-    postLoginSubmit: '/api/admin/login/index',
-    postLoginOut: '/api/admin/login/out',
+    postLoginSubmit: '/api/login/index',
+    postLoginOut: '/api/login/out',
 };

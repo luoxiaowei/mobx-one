@@ -48,7 +48,7 @@ class Search extends React.Component {
                                 rules: [{ required: false }]
                             })(
                                 <Input 
-                                    placeholder="请输入" 
+                                    placeholder="请输入商户名称" 
                                     onChange={this.handleChange} 
                                     maxLength={100}
                                     onKeyUp={e => {

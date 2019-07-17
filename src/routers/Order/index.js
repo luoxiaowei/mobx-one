@@ -5,12 +5,14 @@ import OrderList from './OrderList/OrderList';
 Router.addRoute({
     title: '订单管理',
     path: '/order',
+    authKey: 'MENU_ORDERS',
     childs: [
         {
             title: '订单列表',
             path: '/orderList',
             component: OrderList,
-            isMune: true
+            isMune: true,
+            authKey: 'MENU_ORDERS',
         }
     ]
 });

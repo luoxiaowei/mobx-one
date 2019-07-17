@@ -3,6 +3,7 @@ import { observer, inject } from "mobx-react";
 import { Popconfirm, message, Button } from 'antd';
 import { Image } from 'components/Common';
 import List from './views/List';
+import Search from './views/Search';
 
 @inject('order')
 @observer
@@ -59,17 +60,17 @@ class Main extends Component{
                     return record.status == '0' ? (
                         <div className={'operate'}>
                             <Popconfirm
-                                title={'确定通过吗？'}
+                                title={'确定充值成功吗？'}
                                 onConfirm={() => this.handleChangeStatus(record.id, '1')}
                                 okText="确定"
                                 cancelText="取消"
-                            ><span>通过</span></Popconfirm>
+                            ><span>充值成功</span></Popconfirm>
                             <Popconfirm
-                                title={'确定拒绝吗？'}
+                                title={'确定充值失败吗？'}
                                 onConfirm={() => this.handleChangeStatus(record.id, '2')}
                                 okText="确定"
                                 cancelText="取消"
-                            ><span>拒绝</span></Popconfirm>
+                            ><span>充值失败</span></Popconfirm>
                         </div>
                     ) : null;
                 }
@@ -107,6 +108,7 @@ class Main extends Component{
         };
         return (
             <div>
+                <Search />
                 <List {...listProps} />
             </div>
         );

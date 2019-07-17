@@ -33,8 +33,8 @@ export default class Main extends Component {
         }
         this.props.login.postLoginSubmit({ account, password }, (res) => {
             if (res.errcode == 0) {
-                const { account, name } = res.data;
-                localStorage.setItem('webInfo', JSON.stringify({ account, name }));
+                const { account, name, menu } = res.data;
+                localStorage.setItem('webInfo', JSON.stringify({ account, name, menu }));
                 history.push('/bankCardList');
             } else {
                 message.error(res.msg || '登录失败');

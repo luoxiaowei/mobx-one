@@ -1,6 +1,6 @@
 export default {
-    getBusinessList: '/api/admin/merchant/list',
-    delBusinessItem: '/api/admin/merchant/delete',
-    addBusinessItem: '/api/admin/merchant/create',
-    editBusinessItem: '/api/admin/merchant/edit'
+    getBusinessList: '/api/merchant/list',
+    delBusinessItem: '/api/merchant/delete',
+    addBusinessItem: '/api/merchant/create',
+    editBusinessItem: '/api/merchant/edit'
 };

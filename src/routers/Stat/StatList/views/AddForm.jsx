@@ -99,7 +99,7 @@ class AddForm extends React.Component {
                         <Col span={24}>
                             <FormItem label={'开户行'} { ...formItemLayout }>
                                 {getFieldDecorator('bank_sign', {
-                                    initialValue: formValue.bank_sign || undefined,
+                                    initialValue: formValue.bank_sign || '',
                                     rules: [{ required: true, message: '不能为空' }]
                                 })(
                                     <Select 
@@ -134,17 +134,6 @@ class AddForm extends React.Component {
                                 })(
                                     <Input placeholder="请输入当日转账额度" maxLength={100} />
                                 )}
-                            </FormItem>
-                        </Col>
-                        <Col span={24}>
-                            <FormItem label={'CARD_ID'} { ...formItemLayout }>
-                                {getFieldDecorator('card_id', {
-                                    initialValue: formValue.card_id || '',
-                                    rules: [{ required: true, message: '不能为空' }]
-                                })(
-                                    <Input placeholder="请输入CARD_ID" />
-                                )}
-                                <span>添加ID自动隐藏，不添加不隐藏, <a target={'_blank'} href={'http://t.wwei.cn/index-wenan-view.html?id=76'} className={'cmain'}>获取ID教程</a></span>
                             </FormItem>
                         </Col>
                     </Row>

@@ -1,4 +1,4 @@
 export default {
-    getOrderList: '/api/admin/orders/list',
-    getOrderChangeStatus: '/api/admin/orders/verify',
+    getOrderList: '/api/orders/list',
+    getOrderChangeStatus: '/api/orders/verify',
 };

@@ -5,12 +5,14 @@ import BankCardList from './BankCardList/BankCardList';
 Router.addRoute({
     title: '银行卡管理',
     path: '/bankCard',
+    authKey: 'MENU_ACCOUNT',
     childs: [
         {
             title: '银行卡列表',
             path: '/bankCardList',
             component: BankCardList,
-            isMune: true
+            isMune: true,
+            authKey: 'MENU_ACCOUNT',
         }
     ]
 });

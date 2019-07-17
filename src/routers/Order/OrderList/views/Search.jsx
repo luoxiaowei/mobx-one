@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Form, Input, Row, Col, Button } from 'antd';
 const FormItem = Form.Item;
 
-@inject('bankCard')
+@inject('order')
 @observer
 
 class Search extends React.Component {
@@ -14,14 +14,14 @@ class Search extends React.Component {
     }
 
     handleSubmit = () => {
-        this.props.bankCard.getBankCardList();
+        this.props.order.getOrderList();
         this.props.onOk && this.props.onOk();
     }
     handleChange = (e) => {
-        this.props.bankCard.filter.text = e.target.value;
+        this.props.order.filter.text = e.target.value;
     }
     componentWillUnmount() {
-        this.props.bankCard.filter.text = '';
+        this.props.order.filter.text = '';
     }
 
     render() {
@@ -48,7 +48,7 @@ class Search extends React.Component {
                                 rules: [{ required: false }]
                             })(
                                 <Input 
-                                    placeholder="请输入姓名/卡号" 
+                                    placeholder="请输入订单号/会员号" 
                                     onChange={this.handleChange} 
                                     maxLength={100}
                                     onKeyUp={e => {

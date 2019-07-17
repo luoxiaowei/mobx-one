@@ -6,6 +6,7 @@ import { Layout, LocaleProvider, Menu, Icon, Button, Dropdown } from 'antd';
 import zhCN from 'antd/es/locale-provider/zh_CN';
 import { Iconfont } from 'components/Common';
 import history from 'utils/history';
+import { isAuth } from 'utils/utils';
 const { Header, Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
@@ -26,7 +27,7 @@ export default class Main extends Component {
     renderMenu = (list) => {
         return list && list.map(item => {
             if (item.childs && item.childs.length > 0) {
-                return (
+                return isAuth(item.authKey) ? (
                     <SubMenu key={item.path} title={
                         <div>
                             <Iconfont className={'pr10 cwhite'} type={item.icon || 'product'} />
@@ -35,9 +36,9 @@ export default class Main extends Component {
                     }>
                         {this.renderMenu(item.childs)}
                     </SubMenu>
-                );
+                ) : null;
             } else {
-                return item.isMune ? (
+                return (isAuth(item.authKey) && item.isMune) ? (
                     <Menu.Item key={item.path}>
                         <Link to={item.path}>
                             <Iconfont className={'pr10 cwhite'} type={item.icon || 'product'} />
