@@ -7,8 +7,8 @@ class CreateStore {
     @observable image = '';
     @observable user_number = '';
 
-    @action async getOrder(cb) { 
-        const result = await ajax.post(api.getOrder,{ amount: this.amount } );
+    @action async getOrder(id, cb) { 
+        const result = await ajax.post(api.getOrder,{ amount: this.amount, id } );
         cb && cb(result);
     }
     @action async getCode(params, cb) { 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Iconfont } from 'components';
 import history from 'utils/history';
-import { observer, inject } from "mobx-react"
+import { observer, inject } from "mobx-react";
+import { getQuery } from 'utils/utils';
 @inject('create')
 @observer
 
@@ -22,6 +23,8 @@ export default class Main extends Component {
     }
 
     render() {
+        const { location } = this.props;
+        const { id } = getQuery(location.search) || {};
         return (
             <div className={'flexfc flexjc p15'} style={{ height: '90vh' }}>
                 <div className={'pb20'}>
@@ -50,7 +53,7 @@ export default class Main extends Component {
                 <span className={'fs12 pb20 cwarn'}>请注意：此金额需和实际支付金额相同，否则将无法自动上分</span>
                 <div className={'flexjc pt20'}>
                     <button onClick={() => {
-                        this.props.create.getOrder((res) => {
+                        this.props.create.getOrder(id, (res) => {
                             history.push('/order', { ...res.data });
                         });
                     }}>下一步</button>

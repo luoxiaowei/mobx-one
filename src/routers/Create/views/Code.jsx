@@ -19,7 +19,8 @@ export default class Main extends Component {
 
     render() {
         const { location } = this.props;
-        const { order_sn, orders_id, bank_id, amount, imgSrc } = location.state || {};
+        const { order_sn, orders_sn, orders_id, bank_id, amount, imgSrc } = location.state || {};
+        // console.log(location.state);
         if (!orders_id) {
             history.go(-1);
         }
@@ -27,7 +28,7 @@ export default class Main extends Component {
             <div className={'flexfc flexjc p15'} style={{ height: '90vh' }}>
                 <div className={'tc pb20'}>
                     <span className={'pr5'}>订单号：</span>
-                    <span>{order_sn}</span>
+                    <span>{orders_sn}</span>
                 </div>
                 <div className={'tc'}>重复扫码不到账，请只支付一次（5分钟内有效）</div>
                 <div className={'cred tc ptb20 fs20'}>{amount} 元</div>

@@ -50,7 +50,7 @@ export default class Main extends Component {
                 <div className={'flexjc pt20'}>
                     <button onClick={() => {
                         this.props.create.getCode({orders_id, bank_id}, (res) => {
-                            history.push('/code', { ...location.state, imgSrc: res.data.src });
+                            history.push('/code', { ...location.state, imgSrc: res.data.src, ...res.data });
                         }); 
                     }}>去支付</button>
                 </div>
