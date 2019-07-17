@@ -13,8 +13,8 @@ export default class Main extends Component {
         };
     }
 
-    handleReady = () => {
-        
+    handleChangeImage = (imgs) => {
+        this.props.create.image = imgs[0];
     }
 
     handleChange = (e) => {
@@ -31,7 +31,9 @@ export default class Main extends Component {
             <div className={'flexfc flexjc p15'} style={{ height: '75vh' }}>
                 <div className={'flexac pb20'}>
                     <div className={'w3'}>上传图片：</div>
-                    <UploadImg />
+                    <UploadImg 
+                        onChange={this.handleChangeImage}
+                    />
                 </div>
                 <div className={'flexac pb20'}>
                     <div className={'w3'}>会员账号：</div>
@@ -46,7 +48,6 @@ export default class Main extends Component {
                                 user_number: this.props.create.user_number,
                                 bank_id
                             }, (res) => {
-                                console.log(123);
                                 history.push('/success');
                             })
                         }}

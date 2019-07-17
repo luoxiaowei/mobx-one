@@ -52,7 +52,7 @@ export default class Main extends Component {
                         this.props.create.getCode({orders_id, bank_id}, (res) => {
                             history.push('/code', { ...location.state, imgSrc: res.data.src });
                         }); 
-                    }}>支付去</button>
+                    }}>去支付</button>
                 </div>
             </div>
         );

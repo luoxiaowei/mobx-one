@@ -30,7 +30,7 @@ export default class Main extends Component {
                     <span>{order_sn}</span>
                 </div>
                 <div className={'tc'}>重复扫码不到账，请只支付一次（5分钟内有效）</div>
-                <div className={'cred tc ptb20 fs20'}>100000 元</div>
+                <div className={'cred tc ptb20 fs20'}>{amount} 元</div>
                 {/* <div className={'tc pb20'}>倒计时： </div> */}
                 <div className={'tc pb10'}>请支付宝识别二维码，扫码付款</div>
                 <div className={'flexcc'}>
@@ -40,7 +40,7 @@ export default class Main extends Component {
                 <div className={'flexjc pt20'}>
                     <button onClick={() => {
                         history.push('/member', { orders_id, bank_id });
-                    }}>已转帐</button>
+                    }}>已支付 下一步</button>
                 </div>
             </div>
         );

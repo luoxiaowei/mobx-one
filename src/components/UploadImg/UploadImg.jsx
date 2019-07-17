@@ -75,7 +75,7 @@ export default class UploadImg extends React.PureComponent {
                     let formData = new FormData();
                     formData.append('file', file);
                     let xhr = new XMLHttpRequest();
-                    xhr.open('POST', '/api/wap/upload/index', true);
+                    xhr.open('POST', '/api/upload/index', true);
                     xhr.send(formData);
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === 4) {
@@ -121,7 +121,9 @@ export default class UploadImg extends React.PureComponent {
                                     });
                                 }}
                             />
-                            <Iconfont onClick={() => this.handleDel(index)} className={styles._del} type={'del'} />
+                            <div onClick={() => this.handleDel(index)} className={styles._del + ' flexcc'}>
+                                <Iconfont type={'del'} />
+                            </div>
                         </div> 
                     );
                 })}
@@ -143,6 +145,6 @@ export default class UploadImg extends React.PureComponent {
 }
 UploadImg.defaultProps = {
     className: '',
-    limit: 2,
+    limit: 1,
     defaultImg: []
 };
