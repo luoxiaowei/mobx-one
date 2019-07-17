@@ -69,6 +69,13 @@ class Main extends Component{
         this.props.bankCard.getBankCardList();
     }
 
+    componentWillUnmount() {
+        this.props.bankCard.filter = {
+            page: 1, 
+            pageSize: 10
+        }
+    }
+
     handleEdit = (formValue) => {
         this.setState({
             formValue,
@@ -121,7 +128,7 @@ class Main extends Component{
             <div>
                 <Search {...searchProps}/>
                 <List {...listProps} />
-                <AddForm {...addFormProps}/>
+                {this.state.visible && <AddForm {...addFormProps}/>}
             </div>
         );
     }

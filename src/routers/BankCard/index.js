@@ -6,6 +6,7 @@ Router.addRoute({
     title: '银行卡管理',
     path: '/bankCard',
     authKey: 'MENU_ACCOUNT',
+    icon: 'backCard',
     childs: [
         {
             title: '银行卡列表',

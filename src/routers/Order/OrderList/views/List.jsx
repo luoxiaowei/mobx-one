@@ -10,7 +10,7 @@ class OrderList extends React.Component {
         this.copy = {};
     }
     render() {
-        const { list, loading, total, getNextPageList, id, isPagination, rowSelection, filter } = this.props;
+        const { list, loading, total, getNextPageList, id, isPagination, rowSelection, filter, total_amount } = this.props;
         const pagination = {
             pageSize: 10,
             showQuickJumper: true,
@@ -41,8 +41,8 @@ class OrderList extends React.Component {
                         return (
                             <div key={'tr' + i} className={'mb10'} style={{ border: '1px solid #e8e8e8', borderRight: 'none' }}>
                                 <div className={'p10'} style={{ background: '#eee' }}>
-                                    <span className={'pr10'}>订单号: 
-                                        {record.orders_sn}
+                                    <span className={'pr10'}>订单号: &nbsp;
+                                        {record.order_sn}
                                     </span>
                                 </div>
                                 <div className={'flex'}>

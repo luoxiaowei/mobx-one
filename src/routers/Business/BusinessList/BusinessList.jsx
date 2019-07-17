@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { observer, inject } from "mobx-react";
 import { Popconfirm, message, Button } from 'antd';
-import { List, Image } from 'components/Common';
+import { List, Copy } from 'components/Common';
 import Search from './views/Search';
 import AddForm from './views/AddForm';
 
@@ -15,30 +15,72 @@ class Main extends Component{
             formValue: {},
             visible: false
         };
+        this.copy = {};
         this.modalKey = 1;
         this.columns = [
             {
                 title: '商户名称',
                 dataIndex: 'name',
-                width: '30%',
+                width: '20%',
             },
             {
                 title: '商户登录账号',
                 dataIndex: 'account',
-                // width: '20%',
+                width: '16%',
+            },
+            {
+                title: '权限',
+                dataIndex: 'is_supper',
+                width: '14%',
+                render: (text) => {
+                    return (
+                        <div>
+                            {text == 1 ? '超级管理员' : '--' }
+                        </div>
+                    );
+                }
+            },
+            {
+                title: '是否停用',
+                dataIndex: 'is_close',
+                width: '14%',
+                render: (text) => {
+                    return (
+                        <div>{text == 1 ? '停用' : '正常'}</div>
+                    );
+                }
             },
             {
                 title: '操作',
                 render: (record) => {
+                    let text = record.is_close == 1 ? '启用' : '停用'
                     return (
                         <div className={'operate'}>
                             <span onClick={() => this.handleEdit(record) }>编辑</span>
                             <Popconfirm
-                                title={'确定删除吗？'}
+                                title={'确定' + text + '吗？'}
                                 onConfirm={() => this.handleDel(record.id)}
                                 okText="确定"
                                 cancelText="取消"
-                            ><span>删除</span></Popconfirm>
+                            ><span>{text}</span></Popconfirm>
+                            <span onClick={() => {
+                                this.copy[record.id].handleCopy();
+                            }}>
+                                <span style={{ opacity: 0, position: 'fixed', zIndex: -1 }}>
+                                    <Copy 
+                                        ref={ref => this.copy[record.id] = ref} 
+                                        copyText={record.url}
+                                        callback={(status, msg) => {
+                                            if (status) {
+                                                message.success('复制成功');
+                                            } else {
+                                                message.error('复制失败');
+                                            }
+                                        }}
+                                    />
+                                </span>
+                                复制支付链接
+                            </span>
                         </div>
                     );
                 }
@@ -50,6 +92,13 @@ class Main extends Component{
         this.props.business.getBusinessList();
     }
 
+    componentWillUnmount() {
+        this.props.business.filter = {
+            page: 1, 
+            pageSize: 10
+        }
+    }
+
     handleEdit = (formValue) => {
         this.setState({
             formValue,
@@ -58,9 +107,9 @@ class Main extends Component{
     }
 
     handleDel = (id) => {
-        this.props.bankCard.delBankCardItem(id, () => {
-            message.success('删除成功');
-            this.props.bankCard.getBankCardList();
+        this.props.business.delBusinessItem(id, () => {
+            message.success('操作成功');
+            this.props.business.getBusinessList();
         })
     }
     handleAdd = () => {
@@ -102,7 +151,7 @@ class Main extends Component{
             <div>
                 <Search {...searchProps}/>
                 <List {...listProps} />
-                <AddForm {...addFormProps}/>
+                {this.state.visible && <AddForm {...addFormProps}/>}
             </div>
         );
     }

@@ -6,6 +6,7 @@ Router.addRoute({
     title: '商户管理',
     path: '/business',
     authKey: 'MENU_MERCHANT',
+    icon: 'bussnise',
     childs: [
         {
             title: '商户展示',

@@ -41,7 +41,7 @@ export default class Main extends Component {
                 return (isAuth(item.authKey) && item.isMune) ? (
                     <Menu.Item key={item.path}>
                         <Link to={item.path}>
-                            <Iconfont className={'pr10 cwhite'} type={item.icon || 'product'} />
+                            {item.icon && <Iconfont className={'pr10 cwhite'} type={item.icon} />}
                             <span>{item.title}</span>
                         </Link>
                     </Menu.Item>
@@ -91,52 +91,44 @@ export default class Main extends Component {
         }
         return (
             <Layout>
-                <Sider collapsed={this.state.collapsed}>
-                    <div style={{ height: 100 }}></div>
-                    <Menu
-                        theme={'dark'}
-                        mode="inline"
-                        defaultOpenKeys={defaultOpenKeys}
-                        defaultSelectedKeys={[location.pathname]}
-                    >
-                        {this.renderMenu(menuList)}
-                    </Menu>
-                </Sider>
-                <Layout>
-                    <Header
-                        style={{ 
-                            position: 'fixed', 
-                            zIndex: 10, 
-                            borderBottom: '1px solid #f0f2f5', 
-                            width: 'calc(100% - 200px)'
-                        }}
-                        className={'w12 mb10 bgwhite'}
-                    >
-                        <div style={{ height: '64px', lineHeight: '64px' }} className={'flexsb bgwhite'}>
-                            <div className={'flexac'}>
-                                <Icon
-                                    className="trigger"
-                                    type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                                    onClick={() => this.setState({ collapsed: !this.state.collapsed })}
-                                />
-                            </div>
-                            <div className={'flexac'}>
-                                {/* <Dropdown overlay={<Menu>
-                                        <Menu.Item>
-                                            <span>退出</span>
-                                        </Menu.Item>
-                                    </Menu>} placement="bottomCenter">
-                                    <div>
-                                        <Iconfont type={'user'} />
-                                        <span onClick={this.handleOut} className={'pl10 poi cmain'}>{(webInfo || {}).name}, 退出</span>
-                                    </div>
-                                </Dropdown> */}
-                                <Iconfont type={'user'} />
-                                <span onClick={this.handleOut} className={'pl10 poi cmain'}>{(webInfo || {}).name}, 退出</span>
-                            </div>
+                <Header
+                    style={{ 
+                        position: 'fixed', 
+                        zIndex: 10, 
+                        // borderBottom: '1px solid #f0f2f5',
+                        background: '#011d22' 
+                    }}
+                    className={'w12 mb10 cwhite'}
+                >
+                    <div style={{ height: '64px', lineHeight: '64px' }} className={'flexsb'}>
+                        <div className={'flexac'}>
+                            <div className={'fs16 pr20'}>管理系统</div>
+                            <Icon
+                                className="trigger"
+                                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                                onClick={() => this.setState({ collapsed: !this.state.collapsed })}
+                            />
                         </div>
-                        
-                    </Header>
+                        <div className={'flexac'}>
+                            <Iconfont className={'cwhite'} type={'user'} />
+                            <span onClick={this.handleOut} className={'pl10 poi cmain'}>{(webInfo || {}).name}, 退出</span>
+                        </div>
+                    </div>
+                    
+                </Header>
+                <Layout>
+                    <Sider collapsed={this.state.collapsed}>
+                        <div style={{ height: 100 }}></div>
+                        <Menu
+                            theme={'dark'}
+                            mode="inline"
+                            defaultOpenKeys={defaultOpenKeys}
+                            defaultSelectedKeys={[location.pathname]}
+                        >
+                            {this.renderMenu(menuList)}
+                        </Menu>
+                    </Sider>
+                    
                     <Content
                         style={{ marginTop: 74 }}
                     >

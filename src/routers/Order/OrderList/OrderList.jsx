@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { observer, inject } from "mobx-react";
 import { Popconfirm, message, Button } from 'antd';
 import { Image } from 'components/Common';
+import { getQuery } from 'utils/utils';
 import List from './views/List';
 import Search from './views/Search';
 
@@ -17,27 +18,39 @@ class Main extends Component{
             {
                 title: '充值金额',
                 dataIndex: 'amount',
-                width: '12%',
+                width: '10%',
             },
             {
                 title: '转账截图',
                 dataIndex: 'image',
-                width: '18%',
+                width: '16%',
                 render: (text) => {
                     return (
-                        <Image alt={text} src={text} />
+                        <div className={'w12 flexcc p10'}>
+                            <Image alt={text} src={text} />
+                        </div>
+                        
                     );
                 }
             },
             {
                 title: '会员号',
-                dataIndex: 'bank_number',
-                width: '14%',
+                dataIndex: 'user_number',
+                width: '12%',
             },
             {
                 title: '充值账户',
                 dataIndex: 'bank_number',
-                width: '14%',
+                width: '20%',
+                render: (text, record) => {
+                    return (
+                        <div className={'pl10 break'}>
+                            <p>{record.name}</p>
+                            <p>{record.bank_name}</p>
+                            <p>{record.bank_number}</p>
+                        </div>
+                    );
+                }
             },
             {
                 title: '时间',
@@ -78,8 +91,43 @@ class Main extends Component{
         ];
     }
 
-    componentDidMount() {
+    componentDidMount() { 
+        const { bank_number, merchant_id } = getQuery(this.props.location.search) || {};
+        if (bank_number && merchant_id) {
+            this.props.order.filter = {
+                ...this.props.order.filter,
+                bank_number, 
+                merchant_id
+            };
+        }
         this.props.order.getOrderList();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { location } = nextProps;
+        if (location.search != this.props.location.search) {
+            const { bank_number, merchant_id } = getQuery(nextProps.location.search) || {};
+            let filter = { ...this.props.order.filter };
+            if (bank_number && merchant_id) {
+                filter = {
+                    ...filter,
+                    bank_number, 
+                    merchant_id
+                };
+            } else {
+                filter.bank_number && delete filter.bank_number;
+                filter.merchant_id && delete filter.merchant_id;
+            }
+            this.props.order.filter = filter;
+            this.props.order.getOrderList();
+        }
+    }
+
+    componentWillUnmount() {
+        this.props.order.filter = {
+            page: 1, 
+            pageSize: 10
+        }
     }
 
     handleChangeStatus = (id, status) => {
@@ -92,7 +140,7 @@ class Main extends Component{
     }
 
     render () {
-        const { list, total, loading, id, filter } = this.props.order;
+        const { list, total, loading, id, filter, success_amount, fail_amount } = this.props.order;
         const listProps = {
             list,
             total,
@@ -109,6 +157,10 @@ class Main extends Component{
         return (
             <div>
                 <Search />
+                <div className={'cmain pr20 fs16 pb15'}>
+                    <span className={'pr30'}>支付成功金额：¥ {success_amount}</span>
+                    <span>支付失败金额：¥ {fail_amount}</span>
+                </div>
                 <List {...listProps} />
             </div>
         );

@@ -6,6 +6,8 @@ class OrderStore {
     @observable list = [];
     @observable total = 0;
     @observable loading = false;
+    @observable success_amount = 0;
+    @observable fail_amount = 0;
     @observable id = 'id';
     @observable filter = {
         page: 1, 
@@ -22,6 +24,8 @@ class OrderStore {
         runInAction(() => {
             this.list = result.data;
             this.total = result.total;
+            this.success_amount = result.success_amount;
+            this.fail_amount = result.fail_amount;
             this.loading = false;
         });
     }

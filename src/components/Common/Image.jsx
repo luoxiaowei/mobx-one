@@ -20,7 +20,7 @@ export default class ImageBox extends React.Component{
     render() {
         const { src, alt } = this.props;
         return (
-            <div className={'wh100'}>
+            <div style={{ width: '100px' }}>
                 {this.state.isImg ?  <img src={src} alt={alt} /> : <img src={require('static/default.png')} alt={alt} />}
             </div>
         );

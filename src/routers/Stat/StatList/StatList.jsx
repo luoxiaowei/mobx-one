@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { observer, inject } from "mobx-react";
 import { Row, Col } from 'antd';
+import history from 'utils/history';
 import { List } from 'components/Common';
 import Search from './views/Search';
 
@@ -14,10 +15,15 @@ class Main extends Component{
             {
                 title: '商户名称',
                 dataIndex: 'merchant_name',
-                width: '16%',
+                width: '14%',
                 render: (value, row, index) => {
                     return {
-                        children: value,
+                        children: (
+                            <div>
+                                <p>{value}</p>
+                                <p className={'cmain'}>支付总金额：¥ {row.total_amount}</p>
+                            </div>
+                        ),
                         props: {
                             rowSpan: row.row
                         }
@@ -27,33 +33,55 @@ class Main extends Component{
             {
                 title: '开户行',
                 dataIndex: 'bank_name',
-                width: '16%'
+                width: '14%'
             },
             {
                 title: '银行卡号',
                 dataIndex: 'bank_number',
-                width: '22%',
+                width: '20%',
             },
             {
                 title: '支付笔数',
                 dataIndex: 'recharge_times',
-                width: '14%'
+                width: '12%'
             },
             {
                 title: '支付总金额',
                 dataIndex: 'recharge_money',
-                width: '16%'
+                width: '14%'
             },
             {
                 title: '当日转账额度',
                 dataIndex: 'max_amount',
-                // width: '12%'
+                width: '12%'
             },
+            {
+                title: '操作',
+                render: (record) => {
+                    return (
+                        <div className={'operate'}>
+                            <span onClick={() => this.handleLook(record) }>查看订单</span>
+                        </div>
+                    );
+                }
+            }
         ];
     }
 
     componentDidMount() {
         this.props.stat.getStatList();
+    }
+
+    componentWillUnmount() {
+        this.props.stat.filter = {
+            page: 1, 
+            pageSize: 10
+        }
+    }
+
+    handleLook = (record) => {
+        const { bank_number, merchant_id } = record;
+        history.push('/orderList?bank_number=' + bank_number + '&merchant_id=' + merchant_id);
     }
 
     render () {

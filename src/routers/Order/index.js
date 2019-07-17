@@ -6,6 +6,7 @@ Router.addRoute({
     title: '订单管理',
     path: '/order',
     authKey: 'MENU_ORDERS',
+    icon: 'order',
     childs: [
         {
             title: '订单列表',

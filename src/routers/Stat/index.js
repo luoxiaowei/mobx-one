@@ -6,6 +6,7 @@ Router.addRoute({
     title: '总概览',
     path: '/stat',
     authKey: 'MENU_STAT',
+    icon: 'stat',
     childs: [
         {
             title: '商户列表',

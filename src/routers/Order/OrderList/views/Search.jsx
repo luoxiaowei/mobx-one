@@ -1,8 +1,9 @@
 import React from 'react';
 import { observer, inject } from "mobx-react";
 import PropTypes from 'prop-types';
-import { Form, Input, Row, Col, Button } from 'antd';
+import { Form, Input, Row, Col, Button, DatePicker } from 'antd';
 const FormItem = Form.Item;
+const { RangePicker } = DatePicker;
 
 @inject('order')
 @observer
@@ -17,11 +18,19 @@ class Search extends React.Component {
         this.props.order.getOrderList();
         this.props.onOk && this.props.onOk();
     }
+
+    handleChangeTime = (date, dateString) => {
+        this.props.order.filter.start_time = dateString[0];
+        this.props.order.filter.end_time = dateString[1];
+    }
+
     handleChange = (e) => {
         this.props.order.filter.text = e.target.value;
     }
     componentWillUnmount() {
         this.props.order.filter.text = '';
+        this.props.order.filter.start_time = '';
+        this.props.order.filter.end_time = '';
     }
 
     render() {
@@ -40,8 +49,8 @@ class Search extends React.Component {
         };
         return (
             <Form>
-                <Row>
-                    <Col span={10}>
+                <Row gutter={24}>
+                    <Col span={7}>
                         <FormItem { ...formItemLayout }>
                             {getFieldDecorator('text', {
                                 initialValue: filter.text || '',
@@ -60,8 +69,24 @@ class Search extends React.Component {
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={8}>
-                        <div style={{ paddingTop: 4 }} className={'pl10'}>
+                    <Col span={7}>
+                        <FormItem { ...formItemLayout }>
+                            {getFieldDecorator('time', {
+                                initialValue: filter.time || '',
+                                rules: [{ required: false }]
+                            })(
+                                <RangePicker
+                                    showTime={{ format: 'HH:mm:ss' }}
+                                    format="YYYY-MM-DD HH:mm:ss"
+                                    placeholder={['开始时间', '结束时间']}
+                                    onChange={this.handleChangeTime}
+                                    style={{ width: '100%' }}
+                                />
+                            )}
+                        </FormItem>
+                    </Col>
+                    <Col span={4}>
+                        <div style={{ paddingTop: 4 }}>
                             <Button onClick={this.handleSubmit}>搜索</Button>
                         </div>
                     </Col>

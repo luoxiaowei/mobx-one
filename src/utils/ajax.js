@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd';
+import history from './history';
 const ajax = axios.create({
     timeout: 3000,
     withCredentials: true, // 支持跨域
@@ -23,7 +24,7 @@ ajax.interceptors.response.use(function (response) {
     } else if (data.errcode == 0) {
         return response.data;
     } else {
-        message.error(data.msg || '网络不稳定，请稍后再试～');
+        message.error(data.errmsg || '网络不稳定，请稍后再试～');
     }
 }, function (error) {
     // 对响应错误做点什么
