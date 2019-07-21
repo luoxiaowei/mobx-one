@@ -31,9 +31,15 @@ export default class Main extends Component {
         return (
             <div>
                 <div className={'header'}>
-                    {this.getTitle(location.pathname)}
+                    <div className={'flexcc w12'}>
+                        <img src={require('../../../static/header.png')} />
+                    </div>
+                    {/* {this.getTitle(location.pathname)} */}
                 </div>
-                { children }
+                <div className={'content'}>   
+                    { children }
+                </div>
+                
             </div>
         );
     }

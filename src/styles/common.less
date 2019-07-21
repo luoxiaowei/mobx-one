@@ -1,5 +1,6 @@
 :global {
-    input, .input {
+    input, 
+    .input {
         width: 100%;
         line-height: unit(44, @unit) / @base;
         border: 1px solid @border-color;
@@ -10,6 +11,7 @@
             border-color: @border-foucs-color;
         }
     }
+    
     button {
         min-width: unit(100, @unit) / @base;
         padding: unit(4, @unit) / @base unit(10, @unit) / @base;
@@ -20,13 +22,26 @@
     }
 
     .header {
-        background: rgb(57, 62, 64);
-        line-height: unit(44, @unit) / @base;
+        // background: rgb(57, 62, 64) url('../../static/header.png') no-repeat center;
+        background: linear-gradient(to bottom, rgb(92, 97, 108), rgb(121, 127, 143));
+        line-height: unit(54, @unit) / @base;
         color: @white;
         width: 100%;
-        height: unit(44, @unit) / @base;
+        height: unit(54, @unit) / @base;
         max-height: 10vh;
         text-align: center;
         font-size: 16px;
+        position: fixed;
+        display: flex;
+        top: 0;
+        width: 100%;
+        left: 0;
+        z-index: 10;
+    }
+    .content {
+        margin-top: unit(54, @unit) / @base;
+    }
+    .w250 {
+        width: unit(250, @unit) / @base;
     }
 }   

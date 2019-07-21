@@ -71,6 +71,7 @@ module.exports = {
         alias: {
             components: path.resolve(__dirname, "../src/components"),
             utils: path.resolve(__dirname, "../src/utils"),
+            static: path.resolve(__dirname, "../static")
         }
     }
 }

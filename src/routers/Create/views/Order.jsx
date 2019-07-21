@@ -46,12 +46,13 @@ export default class Main extends Component {
                         <div>{amount}</div>
                     </div>
                 </div>
-                <span className={'fs12 pb20 cwarn pt20'}>请注意：若长时间未到账，请联系 <a>在线客服</a> 并提供您的订单号</span>
+                <span className={'fs12 pb20 cwarn pt20'}>请注意：若长时间未到账，请联系在线客服并提供您的订单号</span>
                 <div className={'flexjc pt20'}>
                     <button onClick={() => {
-                        this.props.create.getCode({orders_id, bank_id}, (res) => {
-                            history.push('/code', { ...location.state, imgSrc: res.data.src, ...res.data });
-                        }); 
+                        // this.props.create.getCode({orders_id, bank_id}, (res) => {
+                        //     history.push('/code', { ...location.state, imgSrc: res.data.src, ...res.data });
+                        // }); 
+                        history.push('/code', { ...location.state });
                     }}>去支付</button>
                 </div>
             </div>

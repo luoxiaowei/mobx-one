@@ -30,22 +30,22 @@ export default class Main extends Component {
         return (
             <div className={'flexfc flexjc p15'} style={{ height: '75vh' }}>
                 <div className={'flexac pb20'}>
-                    <div className={'w3'}>上传图片：</div>
+                    <div className={'w5'}>上传转账截图图片：</div>
                     <UploadImg 
                         onChange={this.handleChangeImage}
                     />
                 </div>
-                <div className={'flexac pb20'}>
+                {/* <div className={'flexac pb20'}>
                     <div className={'w3'}>会员账号：</div>
                     <input className={'col'} onChange={this.handleChange} placeholder={'请输入会员账号'} />
-                </div>
+                </div> */}
                 <div className={'flexjc pt20'}>
                     <button
                         onClick={() => {
                             this.props.create.getMember({
                                 orders_id,
                                 image: this.props.create.image,
-                                user_number: this.props.create.user_number,
+                                // user_number: this.props.create.user_number,
                                 bank_id
                             }, (res) => {
                                 history.push('/success');
