@@ -5,7 +5,7 @@ import BankCardList from './BankCardList/BankCardList';
 Router.addRoute({
     title: '银行卡管理',
     path: '/bankCard',
-    authKey: 'MENU_ACCOUNT',
+    authKey: 'MENU_BANK',
     icon: 'backCard',
     childs: [
         {
@@ -13,7 +13,7 @@ Router.addRoute({
             path: '/bankCardList',
             component: BankCardList,
             isMune: true,
-            authKey: 'MENU_ACCOUNT',
+            authKey: 'MENU_BANK',
         }
     ]
 });

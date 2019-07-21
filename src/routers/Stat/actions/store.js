@@ -26,7 +26,7 @@ class StatStore {
                 if (item.bank && item.bank.length) {
                     item.bank.map((it, i) => {
                         if (i != 0) {
-                            list.push({ ...it, row: 0 });
+                            list.push({ ...item, ...it, row: 0 });
                         }
                         
                     })

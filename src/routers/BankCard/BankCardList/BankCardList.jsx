@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { observer, inject } from "mobx-react";
 import { Popconfirm, message, Button } from 'antd';
 import { List } from 'components/Common';
+import history from 'utils/history';
 import Search from './views/Search';
 import AddForm from './views/AddForm';
 
@@ -58,6 +59,7 @@ class Main extends Component{
                                 okText="确定"
                                 cancelText="取消"
                             ><span>删除</span></Popconfirm>
+                            <span onClick={() => this.handleLook(record) }>查看订单</span>
                         </div>
                     );
                 }
@@ -74,6 +76,11 @@ class Main extends Component{
             page: 1, 
             pageSize: 10
         }
+    }
+
+    handleLook = (record) => {
+        const { bank_number, merchant_id } = record;
+        history.push('/orderList?bank_number=' + bank_number);
     }
 
     handleEdit = (formValue) => {

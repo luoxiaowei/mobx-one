@@ -67,7 +67,22 @@ class Main extends Component{
                     );
                 }
             },
-            {
+        ];
+    }
+
+    componentDidMount() { 
+        const { bank_number, merchant_id } = getQuery(this.props.location.search) || {};
+        if (bank_number && merchant_id) {
+            this.props.order.filter = {
+                ...this.props.order.filter,
+                bank_number, 
+                merchant_id
+            };
+        } else {
+            if (bank_number) {
+                this.props.order.filter.bank_number = bank_number;
+            }
+            this.columns.push({
                 title: '操作',
                 render: (text, record) => {
                     return record.status == '0' ? (
@@ -87,18 +102,7 @@ class Main extends Component{
                         </div>
                     ) : null;
                 }
-            }
-        ];
-    }
-
-    componentDidMount() { 
-        const { bank_number, merchant_id } = getQuery(this.props.location.search) || {};
-        if (bank_number && merchant_id) {
-            this.props.order.filter = {
-                ...this.props.order.filter,
-                bank_number, 
-                merchant_id
-            };
+            });
         }
         this.props.order.getOrderList();
     }
@@ -107,16 +111,50 @@ class Main extends Component{
         const { location } = nextProps;
         if (location.search != this.props.location.search) {
             const { bank_number, merchant_id } = getQuery(nextProps.location.search) || {};
-            let filter = { ...this.props.order.filter };
+            let filter = { 
+                ...this.props.order.filter,
+                page: 1, 
+                pageSize: 10
+            };
             if (bank_number && merchant_id) {
                 filter = {
                     ...filter,
                     bank_number, 
                     merchant_id
                 };
+                if (this.columns[this.columns.length - 1].title == '操作') {
+                    this.columns.pop();
+                }
             } else {
                 filter.bank_number && delete filter.bank_number;
                 filter.merchant_id && delete filter.merchant_id;
+                if (bank_number) {
+                    filter.bank_number = bank_number;
+                }
+                if (this.columns[this.columns.length - 1].title != '操作') {
+                    this.columns.push({
+                        title: '操作',
+                        render: (text, record) => {
+                            return record.status == '0' ? (
+                                <div className={'operate'}>
+                                    <Popconfirm
+                                        title={'确定充值成功吗？'}
+                                        onConfirm={() => this.handleChangeStatus(record.id, '1')}
+                                        okText="确定"
+                                        cancelText="取消"
+                                    ><span>充值成功</span></Popconfirm>
+                                    <Popconfirm
+                                        title={'确定充值失败吗？'}
+                                        onConfirm={() => this.handleChangeStatus(record.id, '2')}
+                                        okText="确定"
+                                        cancelText="取消"
+                                    ><span>充值失败</span></Popconfirm>
+                                </div>
+                            ) : null;
+                        }
+                    });
+                }
+                
             }
             this.props.order.filter = filter;
             this.props.order.getOrderList();
@@ -141,6 +179,7 @@ class Main extends Component{
 
     render () {
         const { list, total, loading, id, filter, success_amount, fail_amount } = this.props.order;
+        
         const listProps = {
             list,
             total,
