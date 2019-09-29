@@ -7,17 +7,17 @@ argv.shift();
 argv.shift();
 switch (argv[0]) {
     case 'views': 
-    argv.shift();
-    createViews(argv);
-    break;
+        argv.shift();
+        createViews(argv);
+        break;
     case 'router':
-    argv.shift();
+        argv.shift();
+        createRouter(argv);
+        break;
     default:
-    createRouter(argv);
-    break; 
-    
+        createRouter(argv);
 }
-function createViews(views) {
+function createViews() {
 
 }
 /**
@@ -35,8 +35,8 @@ function createRouter(router) {
     });
 
 }  
-/** 监听后自动生成模块
-chokidar.watch(commonPath.CREATEJSON).on('all', (enevt, path) => {
+// 监听后自动生成模块
+chokidar.watch(commonPath.CREATEJSON).on('all', () => {
     const routers = fs.readdirSync(commonPath.CREATEFILE); // 获取已经存在的模块名
     const createJson = JSON.parse(fs.readFileSync(commonPath.CREATEJSON, 'utf8')); // 获取 create 数据
     createJson.routers.forEach(create => {
@@ -45,7 +45,7 @@ chokidar.watch(commonPath.CREATEJSON).on('all', (enevt, path) => {
             const PATH = commonPath.CREATEFILE + '/' + name;
             const actionsPATH = PATH + '/actions';
             const viewsPATH = PATH + '/views';
-            fs.mkdir(PATH, {}, (err) => {
+            fs.mkdir(PATH, {}, () => {
                 !fs.existsSync(actionsPATH) && fs.mkdirSync(actionsPATH);
                 !fs.existsSync(viewsPATH) && fs.mkdirSync(viewsPATH);
                 // index.js
@@ -91,9 +91,6 @@ chokidar.watch(commonPath.CREATEJSON).on('all', (enevt, path) => {
         }
     });
 });
-
-
- */
 
 
 
